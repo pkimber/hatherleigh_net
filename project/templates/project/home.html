@@ -1,0 +1,23 @@
+{% extends "project/base.html" %}
+{% load staticfiles %}
+
+{% block sub_title %}
+  Home
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  Testing
+{% endblock sub_heading %}
+
+{% block content %}
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      <p>
+        <a href="{% url 'ilivehere.story.create' %}">Click here to create a news story...</a>
+      </p>
+      <p>
+        <a href="{% url 'ilivehere.story.list' %}">List all news stories...</a>
+      </p>
+    </div>
+  </div>
+{% endblock content %}

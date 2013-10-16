@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  hatherleigh.net
+{% endblock title %}
+
+{% block heading %}
+  hatherleigh.net
+{% endblock heading %}
+
+{% block footer %}
+  <div class="legal pure-g-r">
+    <div class="pure-u-1">
+      <div class="l-box legal-logo">
+        <a href="http://yuilibrary.com/">
+          <img height="30" width="65" alt="YUI logo" src="{% static "img/project/yui.png" %}">
+        </a>
+        <p class="legal-license">
+          This site is built using
+          <a href="http://purecss.io/">
+            Yahoo Pure CSS
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock footer %}
