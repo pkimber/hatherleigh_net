@@ -6,18 +6,38 @@
 {% endblock sub_title %}
 
 {% block sub_heading %}
-  Testing
+  Home
 {% endblock sub_heading %}
 
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
-      <p>
-        <a href="{% url 'ilivehere.story.create' %}">Click here to create a news story...</a>
-      </p>
-      <p>
-        <a href="{% url 'ilivehere.story.list' %}">List all news stories...</a>
-      </p>
+      <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+          {% if user.is_active %}
+            <li>
+              <a href="{% url 'ilivehere.story.create.trust' %}">
+                <i class="icon-edit"></i>
+                Create news
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'ilivehere.story.list' %}">
+                <i class="icon-list"></i>
+                List news
+              </a>
+            </li>
+          {% else %}
+            <li>
+              <a href="{% url 'ilivehere.story.create.anon' %}">
+                <i class="icon-edit"></i>
+                Create news
+              </a>
+            </li>
+          {% endif %}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 {% endblock content %}
