@@ -6,6 +6,7 @@ django-reversion==1.7.1
 django-sendfile
 django==1.5.4
 docutils
+easy-thumbnails
 pillow
 psycopg2
 pyyaml

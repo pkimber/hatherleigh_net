@@ -153,6 +153,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     # 'django_extensions',
     'debug_toolbar',
+    'easy_thumbnails',
     'reversion',
     'south',
     'project',
