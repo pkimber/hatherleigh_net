@@ -23,15 +23,18 @@ setup(
     packages=['project', 'project.templatetags', 'project.management', 'project.management.commands', 'settings'],
     package_data={
         'project': [
+            'static/*.*',
+            'static/img/*.*',
+            'static/img/project/*.*',
             'templates/*.*',
             'templates/project/*.*',
         ],
     },
-    version='0.0.21',
+    version='0.0.22',
     description='hatherleigh web site',
     author='Patrick Kimber',
-    author_email='patrick.kimber@connexionsw.com',
-    url='ssh://hg@bitbucket.org/pkimber/hatherleigh_net',
+    author_email='code@pkimber.net',
+    url='git@github.com:pkimber/hatherleigh_net.git',
     classifiers=[
         'Development Status :: 1 - Planning',
         'Environment :: Console',
