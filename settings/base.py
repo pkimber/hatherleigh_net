@@ -156,6 +156,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'reversion',
     'south',
+    'templatepages',
     'project',
     'base',
     'ilivehere',
