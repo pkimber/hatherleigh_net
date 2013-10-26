@@ -12,11 +12,24 @@ TEMPLATE_STRING_IF_INVALID = '**** INVALID EXPRESSION: %s ****'
 # https://docs.djangoproject.com/en/1.5/howto/static-files/#serving-files-uploaded-by-a-user
 MEDIA_ROOT = 'media'
 
+# The production site has custom templates uploaded using FTP.  We have some
+# example templates in this folder for testing purposes.
+TEMPLATE_DIRS = (
+    os.path.normpath(
+        os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            '..',
+            'example',
+            'templates',
+        )
+    ),
+)
+
 # Django debug toolbar (this is the address of the client not the server)
 INTERNAL_IPS = ('127.0.0.1',)
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
-    'ENABLE_STACKTRACES' : True,
+    'ENABLE_STACKTRACES': True,
 }
 
 # https://github.com/johnsensible/django-sendfile

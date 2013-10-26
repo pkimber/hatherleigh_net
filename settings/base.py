@@ -134,13 +134,6 @@ ROOT_URLCONF = 'project.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'project.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    get_env_variable('FTP_TEMPLATE_DIR'),
-)
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -160,7 +153,7 @@ INSTALLED_APPS = (
     'templatepages',
     'project',
     'base',
-    'ilivehere',
+    'story',
     'login',
 )
 

@@ -1,4 +1,4 @@
 -r base.txt
 pkimber-base==0.0.22
 pkimber-login==0.0.10
-pkimber-ilivehere==0.0.06
+pkimber-story==0.0.08

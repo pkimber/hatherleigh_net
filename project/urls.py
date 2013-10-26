@@ -30,8 +30,8 @@ urlpatterns = patterns(
     url(regex=r'^admin/',
         view=include(admin.site.urls)
         ),
-    url(regex=r'^',
-        view=include('ilivehere.urls')
+    url(regex=r'^story/',
+        view=include('story.urls')
         ),
     url(regex=r'^article/',
         view=include('templatepages.urls'),

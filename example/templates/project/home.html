@@ -16,20 +16,20 @@
         <ul>
           {% if user.is_active %}
             <li>
-              <a href="{% url 'ilivehere.story.create.trust' %}">
+              <a href="{% url 'story.create.trust' %}">
                 <i class="icon-edit"></i>
                 Create news
               </a>
             </li>
             <li>
-              <a href="{% url 'ilivehere.story.list' %}">
+              <a href="{% url 'story.list' %}">
                 <i class="icon-list"></i>
                 List news
               </a>
             </li>
           {% else %}
             <li>
-              <a href="{% url 'ilivehere.story.create.anon' %}">
+              <a href="{% url 'story.create.anon' %}">
                 <i class="icon-edit"></i>
                 Create news
               </a>
