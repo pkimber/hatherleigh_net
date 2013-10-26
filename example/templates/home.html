@@ -1,0 +1,81 @@
+{% extends "project/base.html" %}
+{% load staticfiles %}
+
+{% block sub_title %}
+  Home
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  Home
+{% endblock sub_heading %}
+
+{% block content %}
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+          {% if user.is_active %}
+            <li>
+              <a href="{% url 'story.create.trust' %}">
+                <i class="icon-edit"></i>
+                Create news
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'story.list' %}">
+                <i class="icon-list"></i>
+                List news
+              </a>
+            </li>
+          {% else %}
+            <li>
+              <a href="{% url 'story.create.anon' %}">
+                <i class="icon-edit"></i>
+                Create news
+              </a>
+            </li>
+          {% endif %}
+          </li>
+        </ul>
+      </div>
+      <table class="pure-table pure-table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Area</th>
+            <th>Author</th>
+            <th>Moderated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for story in story_list %}
+            <tr valign="top">
+              <td>
+                {{ story.pk }}
+              </td>
+              <td>
+                <a href="{% url 'story.detail' story.pk %}">
+                  {{ story.title }}
+                </a>
+              </td>
+              <td>{{ story.area.name }}</td>
+              <td>
+                {{ story.author }}
+                <small> {{ story.created|date:"d/m/Y" }}</small>
+              </td>
+              <td>
+                {% if story.moderated %}
+                  <i class="icon-check"></i>
+                  <small>{{ story.date_moderated|date:"d/m/y" }}</small>
+                {% else %}
+                  <i class="icon-check-empty"></i>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock content %}
