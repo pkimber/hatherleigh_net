@@ -30,6 +30,9 @@ urlpatterns = patterns(
     url(regex=r'^admin/',
         view=include(admin.site.urls)
         ),
+    url(regex=r'^captcha/',
+        view=include('captcha.urls')
+        ),
     url(regex=r'^story/',
         view=include('story.urls')
         ),

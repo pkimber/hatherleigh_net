@@ -4,6 +4,7 @@ django-haystack==2.1.0
 django-registration==1.0
 django-reversion==1.7.1
 django-sendfile
+django-simple-captcha
 django-templatepages==0.2.2
 django==1.5.4
 docutils

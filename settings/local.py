@@ -12,8 +12,8 @@ TEMPLATE_STRING_IF_INVALID = '**** INVALID EXPRESSION: %s ****'
 # https://docs.djangoproject.com/en/1.5/howto/static-files/#serving-files-uploaded-by-a-user
 MEDIA_ROOT = 'media'
 
-# The production site has custom templates uploaded using FTP.  We have some
-# example templates in this folder for testing purposes.
+# The production site has custom templates and static media uploaded using
+# FTP.  We have some example templates for testing purposes.
 TEMPLATE_DIRS = (
     os.path.normpath(
         os.path.join(

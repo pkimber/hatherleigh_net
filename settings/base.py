@@ -146,6 +146,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     # 'django_extensions',
+    'captcha',
     'debug_toolbar',
     'easy_thumbnails',
     'reversion',
@@ -211,3 +212,7 @@ LOGGING = {
         },
     }
 }
+
+# https://github.com/mbi/django-simple-captcha
+CAPTCHA_LETTER_ROTATION = None
+CAPTCHA_NOISE_FUNCTIONS = None
