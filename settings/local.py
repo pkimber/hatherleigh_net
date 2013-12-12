@@ -9,6 +9,18 @@ CSRF_COOKIE_SECURE = False
 
 TEMPLATE_STRING_IF_INVALID = '**** INVALID EXPRESSION: %s ****'
 
+# FTP upload 'static' folder
+FTP_STATIC_DIR = os.path.normpath(os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    '..',
+    'project',
+    'tests',
+    'data',
+    'ftp_static_dir',
+))
+# Start a local web server in the 'project' folder.
+FTP_STATIC_URL = 'http://localhost:8080/'
+
 # https://docs.djangoproject.com/en/1.5/howto/static-files/#serving-files-uploaded-by-a-user
 MEDIA_ROOT = 'media'
 
@@ -26,11 +38,11 @@ TEMPLATE_DIRS = (
 )
 
 # Django debug toolbar (this is the address of the client not the server)
-INTERNAL_IPS = ('127.0.0.1',)
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-    'ENABLE_STACKTRACES': True,
-}
+# INTERNAL_IPS = ('127.0.0.1',)
+# DEBUG_TOOLBAR_CONFIG = {
+#     'INTERCEPT_REDIRECTS': False,
+#     'ENABLE_STACKTRACES': True,
+# }
 
 # https://github.com/johnsensible/django-sendfile
 SENDFILE_BACKEND = 'sendfile.backends.development'

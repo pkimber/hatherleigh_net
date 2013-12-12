@@ -7,7 +7,7 @@ if get_env_variable_bool('SSL'):
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = [get_env_variable('DOMAIN'), ]
+ALLOWED_HOSTS = [get_env_variable('ALLOWED_HOSTS'), ]
 
 DATABASES = {
     'default': {
@@ -19,6 +19,9 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+FTP_STATIC_DIR = get_env_variable('FTP_STATIC_DIR')
+FTP_STATIC_URL = get_env_variable('FTP_STATIC_URL')
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
