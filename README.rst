@@ -90,6 +90,9 @@ Admin view:
 http://hatherleigh.info/story/
 http://localhost:8000/story/
 
+FTP
+http://hatherleigh.info/article/andrea.html
+
 Issues
 ======
 
