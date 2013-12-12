@@ -75,6 +75,18 @@ Release and Deploy
 
 https://github.com/pkimber/cloud_docs
 
+Demo
+====
+
+Home page displays stories which have been published:
+http://localhost:8000/
+
+Create a story (as a non-trusted user):
+http://localhost:8000/story/create/anon/
+
+Admin view:
+http://localhost:8000/story/
+
 Issues
 ======
 
