@@ -17,10 +17,6 @@ urlpatterns = patterns(
         view=HomeView.as_view(),
         name='project.home'
         ),
-    url(regex=r'^home/user/$',
-        view=SecureView.as_view(),
-        name='project.home.user'
-        ),
     url(regex=r'^',
         view=include('login.urls')
         ),
