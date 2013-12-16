@@ -17,21 +17,21 @@
           {% if user.is_active %}
             <li>
               <a href="{% url 'story.create.trust' %}">
-                <i class="icon-edit"></i>
-                Create news
+                <i class="fa fa-edit"></i>
+                Create
               </a>
             </li>
             <li>
               <a href="{% url 'story.list' %}">
-                <i class="icon-list"></i>
+                <i class="fa fa-list"></i>
                 List news
               </a>
             </li>
           {% else %}
             <li>
               <a href="{% url 'story.create.anon' %}">
-                <i class="icon-edit"></i>
-                Create news
+                <i class="fa fa-edit"></i>
+                Create
               </a>
             </li>
           {% endif %}

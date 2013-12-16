@@ -74,32 +74,3 @@ Release and Deploy
 ==================
 
 https://github.com/pkimber/cloud_docs
-
-Demo
-====
-
-Home page displays stories which have been published:
-http://hatherleigh.info/
-http://localhost:8000/
-
-Create a story (as a trusted user):
-http://hatherleigh.info/story/create/trust/
-
-Create a story (as a non-trusted user):
-http://hatherleigh.info/story/create/anon/
-http://localhost:8000/story/create/anon/
-
-Admin view:
-http://hatherleigh.info/story/
-http://localhost:8000/story/
-
-FTP
-http://hatherleigh.info/article/andrea.html
-
-Issues
-======
-
-- Captcha image is being cut-off:
-  https://github.com/mbi/django-simple-captcha/pull/50
-
-  Workaround by installing an earlier version of pillow...
