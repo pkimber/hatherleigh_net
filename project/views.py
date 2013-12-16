@@ -9,8 +9,9 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context.update(dict(
-            story_list=Story.objects.filter(date_moderated__isnull=False),
-            #story_list=Story.objects.all(),
+            story_list=Story.objects.filter(
+                moderate_state__slug='published'
+            ).order_by('-created'),
         ))
         return context
 
