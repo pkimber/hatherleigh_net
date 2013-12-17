@@ -1,5 +1,13 @@
+{% load thumbnail %}
 {% for story in story_list %}
   <table width=100% cellspacing=0 cellpadding=0>
+    {% if story.picture %}
+    <tr>
+      <td>
+        <img src="{% thumbnail story.picture 100x100 crop %}" />
+      </td>
+    </tr>
+    {% endif %}
     <tr>
       <td>
         <p><span class="head">{{ story.title }}</span><br>
