@@ -30,7 +30,7 @@ setup(
             'templates/project/*.*',
         ],
     },
-    version='0.0.33',
+    version='0.0.34',
     description='hatherleigh web site',
     author='Patrick Kimber',
     author_email='code@pkimber.net',
