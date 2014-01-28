@@ -24,7 +24,7 @@ to make sure a file has been created for you).
   echo "unset SECRET_KEY" >> $VIRTUAL_ENV/bin/postdeactivate
 
   add2virtualenv ../../app/base
-  add2virtualenv ../../app/story
+  add2virtualenv ../../app/cms
   add2virtualenv ../../app/login
   add2virtualenv .
   deactivate
@@ -39,7 +39,7 @@ Check the imports are in the correct order e.g::
 
   /home/patrick/repo/dev/project/hatherleigh_net
   /home/patrick/repo/dev/app/login
-  /home/patrick/repo/dev/app/story
+  /home/patrick/repo/dev/app/cms
   /home/patrick/repo/dev/app/base
 
 Testing

@@ -1,0 +1,17 @@
+{% extends "story/base.html" %}
+
+{% block sub_title %}
+  Publish news story
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  Publish news story
+{% endblock sub_heading %}
+
+{% block content %}
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      {% include '_form.html' with legend='Are you sure you want to publish this story?' submit='Publish' %}
+    </div>
+  </div>
+{% endblock content %}

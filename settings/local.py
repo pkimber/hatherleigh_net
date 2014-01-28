@@ -9,6 +9,9 @@ CSRF_COOKIE_SECURE = False
 
 TEMPLATE_STRING_IF_INVALID = '**** INVALID EXPRESSION: %s ****'
 
+# https://github.com/mbi/django-simple-captcha
+CAPTCHA_TEST_MODE = True
+
 # FTP upload 'static' folder
 FTP_STATIC_DIR = os.path.normpath(os.path.join(
     os.path.dirname(os.path.realpath(__file__)),

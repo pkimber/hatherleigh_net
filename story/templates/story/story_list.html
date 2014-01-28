@@ -1,12 +1,11 @@
-{% extends "project/base.html" %}
-{% load staticfiles %}
+{% extends "story/base.html" %}
 
-{% block sub_title %}
-  Home
-{% endblock sub_title %}
+{% block title %}
+  News stories
+{% endblock title %}
 
 {% block sub_heading %}
-  Home
+  News stories
 {% endblock sub_heading %}
 
 {% block content %}
@@ -14,27 +13,11 @@
     <div class="pure-u-1">
       <div class="pure-menu pure-menu-open pure-menu-horizontal">
         <ul>
-          {% if user.is_active %}
-            <li>
-              <a href="{% url 'story.create.trust' %}">
-                <i class="fa fa-edit"></i>
-                Create
-              </a>
-            </li>
-            <li>
-              <a href="{% url 'story.list' %}">
-                <i class="fa fa-list"></i>
-                List news
-              </a>
-            </li>
-          {% else %}
-            <li>
-              <a href="{% url 'story.create.anon' %}">
-                <i class="fa fa-edit"></i>
-                Create
-              </a>
-            </li>
-          {% endif %}
+          <li>
+            <a href="{% url 'story.create.trust' %}">
+              <i class="fa fa-edit"></i>
+              Create
+            </a>
           </li>
         </ul>
       </div>
@@ -56,7 +39,9 @@
               </td>
               <td>
                 <a href="{% url 'story.detail' story.pk %}">
+                  {% if story.removed %}<del>{% endif %}
                   {{ story.title }}
+                  {% if story.removed %}</del>{% endif %}
                 </a>
               </td>
               <td>{{ story.area.name }}</td>
@@ -65,18 +50,18 @@
                 <small> {{ story.created|date:"d/m/Y" }}</small>
               </td>
               <td>
-                {% if story.moderated %}
-                  <i class="fa fa-check-square-o"></i>
+                {% if story.is_published %}
+                  <i class="fa fa-thumbs-o-up"></i>
                   <small>{{ story.date_moderated|date:"d/m/y" }}</small>
-                {% else %}
-                  <i class="fa fa-square-o"></i>
+                {% elif story.removed %}
+                  <i class="fa fa-thumbs-o-down"></i>
+                  <small>{{ story.date_moderated|date:"d/m/y" }}</small>
                 {% endif %}
               </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
-      {% include 'project/_story_list.html' %}
     </div>
   </div>
 {% endblock content %}

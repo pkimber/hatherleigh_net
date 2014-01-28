@@ -157,8 +157,9 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'project',
     'base',
-    'story',
+    'cms',
     'login',
+    'story',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -219,6 +220,5 @@ LOGGING = {
 }
 
 # https://github.com/mbi/django-simple-captcha
-# CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 CAPTCHA_LETTER_ROTATION = None
-CAPTCHA_NOISE_FUNCTIONS = []
+CAPTCHA_NOISE_FUNCTIONS = None
