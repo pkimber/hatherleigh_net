@@ -22,7 +22,7 @@
           <font color="#CC0033">
             <b>{{ story.created|date:"M j Y" }} : </b>
           </font>
-          {{ story.description }}
+          {{ story.description|truncatewords_html:160 }}
         </span>
       </td>
     </tr>
