@@ -71,4 +71,28 @@ class TestForm(TestCase):
             form.cleaned_data['description']
         )
 
-        #<img src="https://pkimber.net/media/cms/simple/2013/09/02/cow.jpg" align="center" alt="" style="width: 100px; height: 100px; display: block;">
+    def test_form_clean_description_img_attr(self):
+        html = (
+            'Hot '
+            '<img src="https://pkimber.net/cow.jpg" align="center" alt="" '
+            'style="width: 100px; height: 100px; display: block;">'
+            '<strong>hot</strong>, hot...'
+        )
+        data = dict(
+            name='Patrick',
+            email='code@pkimber.net',
+            area=get_area_hatherleigh().pk,
+            title='Chilli Night',
+            description=html,
+            captcha_0='testing',
+            captcha_1='PASSED',
+        )
+        form = StoryAnonForm(data=data)
+        self.assertTrue(form.is_valid(), form.errors)
+        description = form.cleaned_data['description']
+        self.assertIn('align="center"', description)
+        self.assertIn('alt=""', description)
+        self.assertIn(
+            'style="width: 100px; height: 100px; display: block;"',
+            description
+        )
