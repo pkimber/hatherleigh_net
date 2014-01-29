@@ -59,7 +59,7 @@ class Story(ContentModel):
     name = models.CharField(max_length=100, blank=True)
     area = models.ForeignKey(Area)
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     picture = models.ImageField(upload_to='story/%Y/%m/%d', blank=True)
 
     class Meta:

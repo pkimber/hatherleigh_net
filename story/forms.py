@@ -1,5 +1,10 @@
 from django import forms
 
+from bleach import (
+    clean,
+    ALLOWED_TAGS,
+    ALLOWED_ATTRIBUTES,
+)
 from captcha.fields import CaptchaField
 
 from base.form_utils import (
@@ -16,7 +21,28 @@ class StoryEmptyForm(forms.ModelForm):
         fields = ()
 
 
-class StoryAnonForm(RequiredFieldForm):
+class StoryForm(RequiredFieldForm):
+    """This is an 'abstract' base class, designed to inherited."""
+
+    def __init__(self, *args, **kwargs):
+        super(StoryForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update(
+            {'class': 'pure-input-2-3'}
+        )
+        self.fields['description'].widget.attrs.update(
+            {'class': 'pure-input-2-3'}
+        )
+
+    def clean_description(self):
+        data = self.cleaned_data['description']
+        attributes = ALLOWED_ATTRIBUTES
+        attributes['img'] = ['src',]
+        tags = ALLOWED_TAGS + [u'img',]
+        data = clean(data, tags=tags, attributes=attributes)
+        return data
+
+
+class StoryAnonForm(StoryForm):
     """user is not logged in... so we need a captcha"""
     captcha = CaptchaField()
 
@@ -30,28 +56,13 @@ class StoryAnonForm(RequiredFieldForm):
         self.fields['email'].widget.attrs.update(
             {'class': 'pure-input-1-2'}
         )
-        self.fields['title'].widget.attrs.update(
-            {'class': 'pure-input-2-3'}
-        )
-        self.fields['description'].widget.attrs.update(
-            {'class': 'pure-input-2-3'}
-        )
 
     class Meta:
         model = Story
         fields = ('name', 'email', 'area', 'title', 'description', 'picture')
 
 
-class StoryTrustForm(RequiredFieldForm):
-
-    def __init__(self, *args, **kwargs):
-        super(StoryTrustForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs.update(
-            {'class': 'pure-input-2-3'}
-        )
-        self.fields['description'].widget.attrs.update(
-            {'class': 'pure-input-2-3'}
-        )
+class StoryTrustForm(StoryForm):
 
     class Meta:
         model = Story

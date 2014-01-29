@@ -1,5 +1,12 @@
 {% extends "story/base.html" %}
 
+{% load wysiwyg %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  {% wysiwyg_setup %}
+{% endblock stylesheets %}
+
 {% block sub_title %}
   Create a news story
 {% endblock sub_title %}
@@ -15,3 +22,8 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block script %}
+  {{ block.super }}
+  {% wysiwyg_editor "id_description" %}
+{% endblock script %}

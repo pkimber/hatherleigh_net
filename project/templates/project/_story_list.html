@@ -22,7 +22,9 @@
           <font color="#CC0033">
             <b>{{ story.created|date:"M j Y" }} : </b>
           </font>
-          {{ story.description|truncatewords_html:160 }}
+          {% autoescape off %}
+            {{ story.description|truncatewords_html:160 }}
+          {% endautoescape %}
         </span>
       </td>
     </tr>
