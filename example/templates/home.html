@@ -45,14 +45,14 @@
             <th>Title</th>
             <th>Area</th>
             <th>Author</th>
-            <th>Moderated</th>
+            <th>Published</th>
           </tr>
         </thead>
         <tbody>
           {% for story in story_list %}
             <tr valign="top">
               <td>
-                {{ story.pk }}
+                {{ story.container.pk }}
               </td>
               <td>
                 <a href="{% url 'story.detail' story.pk %}">
@@ -65,17 +65,14 @@
                 <small> {{ story.created|date:"d/m/Y" }}</small>
               </td>
               <td>
-                {% if story.moderated %}
-                  <i class="fa fa-check-square-o"></i>
-                  <small>{{ story.date_moderated|date:"d/m/y" }}</small>
-                {% else %}
-                  <i class="fa fa-square-o"></i>
-                {% endif %}
+                <i class="fa fa-check-square-o"></i>
+                <small>{{ story.date_moderated|date:"d/m/y" }}</small>
               </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
+      <br />
       {% include 'project/_story_list.html' %}
     </div>
   </div>
