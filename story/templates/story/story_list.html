@@ -35,7 +35,7 @@
           {% for story in story_list %}
             <tr valign="top">
               <td>
-                {{ story.pk }}
+                {{ story.container.pk }}
               </td>
               <td>
                 <a href="{% url 'story.detail' story.pk %}">
@@ -53,7 +53,9 @@
                 {% if story.is_published %}
                   <i class="fa fa-thumbs-o-up"></i>
                   <small>{{ story.date_moderated|date:"d/m/y" }}</small>
-                {% elif story.removed %}
+                {% elif story.is_pending %}
+                  <small>Pending</small>
+                {% elif story.is_removed %}
                   <i class="fa fa-thumbs-o-down"></i>
                   <small>{{ story.date_moderated|date:"d/m/y" }}</small>
                 {% endif %}
