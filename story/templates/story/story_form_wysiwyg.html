@@ -1,11 +1,6 @@
 {% extends "story/base.html" %}
 {% load staticfiles %}
 
-{% block stylesheets %}
-  {{ block.super }}
-  <link rel="stylesheet" href="{% static 'base/css/dropzone/dropzone.css' %}">
-{% endblock stylesheets %}
-
 {% block sub_title %}
   {% if story %}
     Update
@@ -48,27 +43,5 @@
   <script src="{% static 'base/js/ck/ckeditor.js' %}" type="text/javascript"></script>
   <script type="text/javascript">
     CKEDITOR.replace('id_description' );
-  </script>
-  <script src="{% static 'base/js/dropzone/dropzone.js' %}" type="text/javascript"></script>
-  <script type="text/javascript">
-    Dropzone.options.myForm = {
-      // Prevents Dropzone from uploading dropped files immediately
-      autoProcessQueue : false,
-      maxFiles: 1,
-      paramName: "picture",
-      init : function() {
-        var submitButton = document.querySelector("#my_submit")
-        myForm = this;
-        submitButton.addEventListener("click", function() {
-          myForm.processQueue();
-          // Tell Dropzone to process all queued files.
-        });
-        // You might want to show the submit button only when
-        // files are dropped here:
-        this.on("addedfile", function() {
-            // Show submit button here and/or inform user to click it.
-        });
-      }
-    };
   </script>
 {% endblock script %}

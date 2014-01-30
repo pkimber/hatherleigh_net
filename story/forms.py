@@ -75,5 +75,5 @@ class StoryTrustForm(StoryForm):
         model = Story
         fields = ('area', 'title', 'description', 'picture')
         widgets = {
-            'picture': forms.FileInput(attrs=dict(fallback=True)),
+            'picture': forms.FileInput,
         }
