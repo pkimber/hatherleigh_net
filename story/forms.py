@@ -64,6 +64,9 @@ class StoryAnonForm(StoryForm):
     class Meta:
         model = Story
         fields = ('name', 'email', 'area', 'title', 'description', 'picture')
+        widgets = {
+            'picture': forms.FileInput,
+        }
 
 
 class StoryTrustForm(StoryForm):
@@ -71,3 +74,6 @@ class StoryTrustForm(StoryForm):
     class Meta:
         model = Story
         fields = ('area', 'title', 'description', 'picture')
+        widgets = {
+            'picture': forms.FileInput(attrs=dict(fallback=True)),
+        }
