@@ -35,10 +35,13 @@ class StoryForm(RequiredFieldForm):
 
     def clean_description(self):
         data = self.cleaned_data['description']
+        #attributes = ALLOWED_ATTRIBUTES
+        #attributes['img'] = ['align', 'alt', 'src', 'style']
+        #styles = ['display', 'height', 'width',]
+        #tags = ALLOWED_TAGS + [u'img',]
         attributes = ALLOWED_ATTRIBUTES
-        attributes['img'] = ['align', 'alt', 'src', 'style']
-        styles = ['display', 'height', 'width',]
-        tags = ALLOWED_TAGS + [u'img',]
+        styles = []
+        tags = ALLOWED_TAGS + [u'br', u'p',]
         data = clean(data, tags=tags, attributes=attributes, styles=styles)
         return data
 

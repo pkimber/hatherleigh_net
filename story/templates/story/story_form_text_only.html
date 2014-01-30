@@ -1,0 +1,38 @@
+{% extends "story/base.html" %}
+
+{% block sub_title %}
+  {% if story %}
+    Update
+  {% else %}
+    Create
+  {% endif %}
+  a news story
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  {% if story %}
+    Update
+  {% else %}
+    Create
+  {% endif %}
+  a news story
+{% endblock sub_heading %}
+
+{% block content %}
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      {% if story %}
+        <p>
+          Created by {{ story.author }}
+          {% if story.email %}
+            {{ story.email|urlize }}
+          {% endif %}
+          <small>
+          on {{ story.created|date:"l d/m/y H:i" }}
+          </small>
+        </p>
+      {% endif %}
+      {% include '_form.html' with legend='News' multipart=True %}
+    </div>
+  </div>
+{% endblock content %}

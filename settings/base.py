@@ -148,7 +148,6 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     # 'django_extensions',
     'captcha',
-    'django_wysiwyg',
     'easy_thumbnails',
     'reversion',
     'south',

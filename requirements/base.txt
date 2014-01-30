@@ -4,7 +4,6 @@ django-haystack==2.1.0
 django-reversion==1.8.0
 django-sendfile==0.3.4
 django-simple-captcha==0.4.1
-django-wysiwyg==0.5.1
 Django==1.6.1
 docutils
 easy-thumbnails==1.4

@@ -3,11 +3,8 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import (
-    CreateView,
-    DeleteView,
     DetailView,
     ListView,
-    UpdateView,
 )
 
 from braces.views import (
@@ -53,7 +50,7 @@ class StoryAnonCreateView(ContentCreateView):
 
     form_class = StoryAnonForm
     model = Story
-    template_name = 'story/story_create_form.html'
+    template_name = 'story/story_form_text_only.html'
 
     def get(self, request, *args, **kwargs):
         """
@@ -69,12 +66,11 @@ class StoryAnonCreateView(ContentCreateView):
         return reverse('project.home')
 
 
-class StoryTrustCreateView(
-        LoginRequiredMixin, ContentCreateView):
+class StoryTrustCreateView(LoginRequiredMixin, ContentCreateView):
 
     form_class = StoryTrustForm
     model = Story
-    template_name = 'story/story_create_form.html'
+    template_name = 'story/story_form_wysiwyg.html'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -148,7 +144,7 @@ class StoryUpdateView(
 
     model = Story
     form_class = StoryTrustForm
-    template_name = 'story/story_update_form.html'
+    template_name = 'story/story_form_wysiwyg.html'
 
     def get_object(self, *args, **kwargs):
         obj = super(StoryUpdateView, self).get_object(*args, **kwargs)
