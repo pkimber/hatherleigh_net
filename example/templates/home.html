@@ -1,5 +1,6 @@
 {% extends "project/base.html" %}
 {% load staticfiles %}
+{% load pump_tags %}
 
 {% block sub_title %}
   Home
@@ -12,7 +13,7 @@
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
-      {% include 'project/_story_list.html' %}
+      {% story_list %}
     </div>
   </div>
 {% endblock content %}

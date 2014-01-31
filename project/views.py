@@ -19,14 +19,6 @@ class HomeView(BaseMixin, TemplateView):
 
     template_name = 'home.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
-        section = get_news_section()
-        context.update(dict(
-            story_list=Story.objects.published(section).order_by('-created'),
-        ))
-        return context
-
 
 class NewsDetailView(BaseMixin, DetailView):
 
