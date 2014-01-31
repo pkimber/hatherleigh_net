@@ -5,7 +5,11 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from .views import HomeView, SecureView
+from .views import (
+    HomeView,
+    NewsDetailView,
+    SecureView,
+)
 
 
 admin.autodiscover()
@@ -16,6 +20,10 @@ urlpatterns = patterns(
     url(regex=r'^$',
         view=HomeView.as_view(),
         name='project.home'
+        ),
+    url(regex=r'^news/(?P<pk>\d+)/$',
+        view=NewsDetailView.as_view(),
+        name='project.news.detail'
         ),
     url(regex=r'^',
         view=include('login.urls')

@@ -1,6 +1,11 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
 
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'story/css/story.css' %}">
+{% endblock stylesheets %}
+
 {% block title %}
   hatherleigh.net
 {% endblock title %}

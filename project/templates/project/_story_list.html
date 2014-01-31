@@ -25,6 +25,9 @@
           {% autoescape off %}
             {{ story.description|truncatewords_html:160 }}
           {% endautoescape %}
+          <a href="{% url 'project.news.detail' story.container.pk %}">
+            Read the full story
+          </a>
         </span>
       </td>
     </tr>

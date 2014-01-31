@@ -86,18 +86,12 @@
         </tbody>
       </table>
       <br />
-      {{ story.description }}
       {% if story.picture %}
-        <br />
-        <br />
-        thumbnail
-        <br />
-        <img src="{% thumbnail story.picture 100x100 crop %}" />
-        <br />
-        picture
-        <br />
-        <img src="{{ story.picture.url }}" />
+        <img id="image_picture" src="{% thumbnail story.picture 300x500 crop %}" />
       {% endif %}
+      {% autoescape off %}
+        {{ story.description }}
+      {% endautoescape %}
     </div>
   </div>
 {% endblock content %}
