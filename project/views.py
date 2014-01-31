@@ -4,6 +4,7 @@ from django.views.generic import (
     TemplateView,
 )
 
+from base.view_utils import BaseMixin
 from cms.models import (
     Container,
 )
@@ -13,7 +14,7 @@ from story.models import (
 )
 
 
-class HomeView(TemplateView):
+class HomeView(BaseMixin, TemplateView):
 
     template_name = 'home.html'
 
@@ -26,7 +27,7 @@ class HomeView(TemplateView):
         return context
 
 
-class NewsDetailView(DetailView):
+class NewsDetailView(BaseMixin, DetailView):
 
     model = Container
     template_name = 'news.html'
@@ -41,8 +42,3 @@ class NewsDetailView(DetailView):
             story=story,
         ))
         return context
-
-
-class SecureView(TemplateView):
-
-    template_name = 'project/secure.html'
