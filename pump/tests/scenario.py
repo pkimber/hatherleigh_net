@@ -5,17 +5,18 @@ from cms.tests.model_maker import (
     make_section,
 )
 from cms.tests.scenario import default_moderate_state
-from story.models import (
-    Area,
-    Story,
-)
-from story.tests.model_maker import (
-    make_area,
-    make_story,
-)
 from login.tests.scenario import (
     get_user_staff,
     get_user_web,
+)
+
+from pump.models import (
+    Area,
+    Story,
+)
+from pump.tests.model_maker import (
+    make_area,
+    make_story,
 )
 
 
@@ -38,7 +39,7 @@ def get_story_market_fire():
     return Story.objects.get(title='Market Offices burnt down')
 
 
-def default_scenario_story():
+def default_scenario_pump():
     default_moderate_state()
     make_area('Hatherleigh')
     make_area('Exbourne')

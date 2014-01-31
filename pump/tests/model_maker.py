@@ -2,7 +2,7 @@ from django.utils.text import slugify
 
 from base.tests.model_maker import clean_and_save
 
-from story.models import (
+from pump.models import (
     Area,
     Story,
 )

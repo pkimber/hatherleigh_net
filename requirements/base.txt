@@ -7,7 +7,7 @@ django-simple-captcha==0.4.1
 Django==1.6.1
 docutils
 easy-thumbnails==1.4
-git+https://github.com/pkimber/django-templatepages.git#templatepages
+git+https://github.com/bryanchow/django-templatepages.git#templatepages
 Pillow==2.3.0
 psycopg2==2.5.1
 PyYAML==3.10

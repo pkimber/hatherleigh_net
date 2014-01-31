@@ -1,4 +1,4 @@
-{% extends "story/base.html" %}
+{% extends "pump/base.html" %}
 
 {% block title %}
   News stories
@@ -14,7 +14,7 @@
       <div class="pure-menu pure-menu-open pure-menu-horizontal">
         <ul>
           <li>
-            <a href="{% url 'story.create.trust' %}">
+            <a href="{% url 'pump.story.create.trust' %}">
               <i class="fa fa-edit"></i>
               Create
             </a>
@@ -38,7 +38,7 @@
                 {{ story.container.pk }}
               </td>
               <td>
-                <a href="{% url 'story.detail' story.pk %}">
+                <a href="{% url 'pump.story.detail' story.pk %}">
                   {% if story.removed %}<del>{% endif %}
                   {{ story.title }}
                   {% if story.removed %}</del>{% endif %}

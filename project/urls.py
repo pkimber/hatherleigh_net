@@ -1,7 +1,9 @@
 from django.conf import settings
-from django.conf.urls import include
-from django.conf.urls import patterns
-from django.conf.urls import url
+from django.conf.urls import (
+    include,
+    patterns,
+    url,
+)
 from django.conf.urls.static import static
 from django.contrib import admin
 
@@ -33,8 +35,8 @@ urlpatterns = patterns(
     url(regex=r'^captcha/',
         view=include('captcha.urls')
         ),
-    url(regex=r'^story/',
-        view=include('story.urls')
+    url(regex=r'^pump/',
+        view=include('pump.urls')
         ),
     url(regex=r'^article/',
         view=include('templatepages.urls'),

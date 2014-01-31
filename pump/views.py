@@ -50,7 +50,7 @@ class StoryAnonCreateView(ContentCreateView):
 
     form_class = StoryAnonForm
     model = Story
-    template_name = 'story/story_form_text_only.html'
+    template_name = 'pump/story_form_text_only.html'
 
     def get(self, request, *args, **kwargs):
         """
@@ -58,7 +58,7 @@ class StoryAnonCreateView(ContentCreateView):
         view... they can use the view for a logged in user.
         """
         if self.request.user and self.request.user.is_active:
-            return HttpResponseRedirect(reverse('story.create.trust'))
+            return HttpResponseRedirect(reverse('pump.story.create.trust'))
         else:
             return super(StoryAnonCreateView, self).get(request, *args, **kwargs)
 
@@ -70,7 +70,7 @@ class StoryTrustCreateView(LoginRequiredMixin, ContentCreateView):
 
     form_class = StoryTrustForm
     model = Story
-    template_name = 'story/story_form_wysiwyg.html'
+    template_name = 'pump/story_form_wysiwyg.html'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -78,7 +78,7 @@ class StoryTrustCreateView(LoginRequiredMixin, ContentCreateView):
         return super(StoryTrustCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('story.list')
+        return reverse('pump.story.list')
 
 
 class StoryDetailView(
@@ -104,7 +104,7 @@ class StoryListView(LoginRequiredMixin, BaseMixin, ListView):
     """
 
     context_object_name = 'story_list'
-    template_name = 'story/story_list.html'
+    template_name = 'pump/story_list.html'
 
     def get_queryset(self):
         section = get_news_section()
@@ -122,10 +122,10 @@ class StoryPublishView(LoginRequiredMixin, ContentPublishView):
 
     form_class = StoryEmptyForm
     model = Story
-    template_name = 'story/story_publish_form.html'
+    template_name = 'pump/story_publish_form.html'
 
     def get_success_url(self):
-        return reverse('story.list')
+        return reverse('pump.story.list')
 
 
 class StoryRemoveView(
@@ -133,10 +133,10 @@ class StoryRemoveView(
 
     form_class = StoryEmptyForm
     model = Story
-    template_name = 'story/story_remove_form.html'
+    template_name = 'pump/story_remove_form.html'
 
     def get_success_url(self):
-        return reverse('story.list')
+        return reverse('pump.story.list')
 
 
 class StoryUpdateView(
@@ -144,7 +144,7 @@ class StoryUpdateView(
 
     model = Story
     form_class = StoryTrustForm
-    template_name = 'story/story_form_wysiwyg.html'
+    template_name = 'pump/story_form_wysiwyg.html'
 
     def get_object(self, *args, **kwargs):
         obj = super(StoryUpdateView, self).get_object(*args, **kwargs)
@@ -154,4 +154,4 @@ class StoryUpdateView(
         return obj
 
     def get_success_url(self):
-        return reverse('story.list')
+        return reverse('pump.story.list')

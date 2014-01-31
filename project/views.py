@@ -8,7 +8,8 @@ from base.view_utils import BaseMixin
 from cms.models import (
     Container,
 )
-from story.models import (
+
+from pump.models import (
     get_news_section,
     Story,
 )

@@ -1,10 +1,10 @@
 from django.test import TestCase
 
 from cms.tests.model_maker import make_container
-from story.models import get_news_section
-from story.tests.model_maker import make_story
-from story.tests.scenario import (
-    default_scenario_story,
+from pump.models import get_news_section
+from pump.tests.model_maker import make_story
+from pump.tests.scenario import (
+    default_scenario_pump,
     get_area_hatherleigh,
     get_story_craft_fair,
     get_story_market_fire,
@@ -22,7 +22,7 @@ class TestStory(TestCase):
     def setUp(self):
         default_scenario_login()
         user_contractor()
-        default_scenario_story()
+        default_scenario_pump()
 
     def test_can_edit(self):
         """

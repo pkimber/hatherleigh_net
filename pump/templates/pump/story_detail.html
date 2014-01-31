@@ -1,4 +1,4 @@
-{% extends "story/base.html" %}
+{% extends "pump/base.html" %}
 
 {% load thumbnail %}
 
@@ -16,19 +16,19 @@
       <div class="pure-menu pure-menu-open pure-menu-horizontal">
         <ul>
           <li>
-            <a href="{% url 'story.list' %}">
+            <a href="{% url 'pump.story.list' %}">
               <i class="fa fa-list"></i>
               Stories
             </a>
           </li>
           <li>
             {% if story.is_published %}
-              <a href="{% url 'story.remove' story.pk %}">
+              <a href="{% url 'pump.story.remove' story.pk %}">
                 <i class="fa fa-thumbs-o-down"></i>
                 Remove
               </a>
             {% else %}
-              <a href="{% url 'story.publish' story.pk %}">
+              <a href="{% url 'pump.story.publish' story.pk %}">
                 <i class="fa fa-thumbs-o-up"></i>
                 Publish
               </a>
@@ -42,7 +42,7 @@
             <td>Title</td>
             <td>
               {% if user_can_edit %}
-                <a href="{% url "story.update" story.pk %}">
+                <a href="{% url 'pump.story.update' story.pk %}">
                   <i class="fa fa-edit"></i>
                   {{ story.title }}
                 </a>

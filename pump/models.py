@@ -88,7 +88,7 @@ class Story(ContentModel):
         super(Story, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('story.detail', args=[self.pk])
+        return reverse('pump.story.detail', args=[self.pk])
 
     def user_can_edit(self, user):
         """

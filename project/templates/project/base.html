@@ -9,20 +9,20 @@
 {% block menu %}
   {% if user.is_active %}
     <li {% if 'create' in path %}class="pure-menu-selected"{% endif %}>
-      <a href="{% url 'story.create.trust' %}">
+      <a href="{% url 'pump.story.create.trust' %}">
         <i class="fa fa-edit"></i>
         Create
       </a>
     </li>
     <li {% if path == '/story/' %}class="pure-menu-selected"{% endif %}>
-      <a href="{% url 'story.list' %}">
+      <a href="{% url 'pump.story.list' %}">
         <i class="fa fa-list"></i>
         List news
       </a>
     </li>
   {% else %}
     <li {% if 'create' in path %}class="pure-menu-selected"{% endif %}>
-      <a href="{% url 'story.create.anon' %}">
+      <a href="{% url 'pump.story.create.anon' %}">
         <i class="fa fa-edit"></i>
         Create
       </a>
