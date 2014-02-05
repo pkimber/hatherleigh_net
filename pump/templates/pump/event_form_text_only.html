@@ -1,0 +1,38 @@
+{% extends "pump/base.html" %}
+
+{% block sub_title %}
+  {% if event %}
+    Update
+  {% else %}
+    Create
+  {% endif %}
+  an event
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  {% if event %}
+    Update
+  {% else %}
+    Create
+  {% endif %}
+  an event
+{% endblock sub_heading %}
+
+{% block content %}
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      {% if event %}
+        <p>
+          Created by {{ event.author }}
+          {% if event.email %}
+            {{ event.email|urlize }}
+          {% endif %}
+          <small>
+          on {{ event.created|date:"l d/m/y H:i" }}
+          </small>
+        </p>
+      {% endif %}
+      {% include '_form.html' with legend='Event' multipart=True %}
+    </div>
+  </div>
+{% endblock content %}

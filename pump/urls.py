@@ -3,6 +3,7 @@ from django.conf.urls import (
 )
 
 from .views import (
+    EventAnonCreateView,
     StoryAnonCreateView,
     StoryDetailView,
     StoryListView,
@@ -15,7 +16,12 @@ from .views import (
 
 urlpatterns = patterns(
     '',
-    url(regex=r'^create/anon/$',
+    url(regex=r'^event/create/anon/$',
+        view=EventAnonCreateView.as_view(),
+        kwargs=dict(page='home', layout='body'),
+        name='pump.event.create.anon'
+        ),
+    url(regex=r'^story/create/anon/$',
         view=StoryAnonCreateView.as_view(),
         kwargs=dict(page='home', layout='body'),
         name='pump.story.create.anon'

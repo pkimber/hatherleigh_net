@@ -21,10 +21,16 @@
       </a>
     </li>
   {% else %}
-    <li {% if 'create' in path %}class="pure-menu-selected"{% endif %}>
+  <li {% if 'event/create' in path %}class="pure-menu-selected"{% endif %}>
+      <a href="{% url 'pump.event.create.anon' %}">
+        <i class="fa fa-edit"></i>
+        Create Event
+      </a>
+    </li>
+    <li {% if 'story/create' in path %}class="pure-menu-selected"{% endif %}>
       <a href="{% url 'pump.story.create.anon' %}">
         <i class="fa fa-edit"></i>
-        Create
+        Create Story
       </a>
     </li>
   {% endif %}

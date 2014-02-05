@@ -21,11 +21,13 @@ from cms.views import (
 )
 
 from .forms import (
+    EventAnonForm,
     StoryAnonForm,
     StoryEmptyForm,
     StoryTrustForm,
 )
 from .models import (
+    Event,
     get_news_section,
     Story,
 )
@@ -44,6 +46,26 @@ class CheckPermMixin(object):
 
     def _check_perm(self, story):
         check_perm(self.request.user, story)
+
+
+class EventAnonCreateView(ContentCreateView):
+
+    form_class = EventAnonForm
+    model = Event
+    template_name = 'pump/event_form_text_only.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+        If a user is logged in (and active), they shouldn't be using this
+        view... they can use the view for a logged in user.
+        """
+        if self.request.user and self.request.user.is_active:
+            return HttpResponseRedirect(reverse('pump.event.create.trust'))
+        else:
+            return super(EventAnonCreateView, self).get(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('project.home')
 
 
 class StoryAnonCreateView(ContentCreateView):
