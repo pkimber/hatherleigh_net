@@ -14,16 +14,17 @@
         Dashboard
       </a>
     </li>
-    <li {% if 'create' in path %}class="pure-menu-selected"{% endif %}>
-      <a href="{% url 'pump.story.create.trust' %}">
-        <i class="fa fa-edit"></i>
-        Create story
+    </li>
+    <li {% if path == '/pump/event/' %}class="pure-menu-selected"{% endif %}>
+      <a href="{% url 'pump.event.list' %}">
+        <i class="fa fa-list"></i>
+        Events
       </a>
     </li>
     <li {% if path == '/pump/story/' %}class="pure-menu-selected"{% endif %}>
       <a href="{% url 'pump.story.list' %}">
         <i class="fa fa-list"></i>
-        List news
+        News
       </a>
     </li>
   {% else %}

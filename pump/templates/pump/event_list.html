@@ -1,11 +1,11 @@
 {% extends "pump/base.html" %}
 
 {% block title %}
-  News stories
+  Events
 {% endblock title %}
 
 {% block sub_heading %}
-  News stories
+  Events
 {% endblock sub_heading %}
 
 {% block content %}
@@ -14,9 +14,9 @@
       <div class="pure-menu pure-menu-open pure-menu-horizontal">
         <ul>
           <li>
-            <a href="{% url 'pump.story.create.trust' %}">
+            <a href="{% url 'pump.event.create.trust' %}">
               <i class="fa fa-edit"></i>
-              Create story
+              Create event
             </a>
           </li>
         </ul>
@@ -32,32 +32,32 @@
           </tr>
         </thead>
         <tbody>
-          {% for story in story_list %}
+          {% for event in event_list %}
             <tr valign="top">
               <td>
-                {{ story.container.pk }}
+                {{ event.container.pk }}
               </td>
               <td>
-                <a href="{% url 'pump.story.detail' story.pk %}">
-                  {% if story.removed %}<del>{% endif %}
-                  {{ story.title }}
-                  {% if story.removed %}</del>{% endif %}
+                <a href="{% url 'pump.event.detail' event.pk %}">
+                  {% if event.removed %}<del>{% endif %}
+                  {{ event.title }}
+                  {% if event.removed %}</del>{% endif %}
                 </a>
               </td>
-              <td>{{ story.area.name }}</td>
+              <td>{{ event.area.name }}</td>
               <td>
-                {{ story.author }}
-                <small> {{ story.created|date:"d/m/Y" }}</small>
+                {{ event.author }}
+                <small> {{ event.created|date:"d/m/Y" }}</small>
               </td>
               <td>
-                {% if story.is_published %}
+                {% if event.is_published %}
                   <i class="fa fa-thumbs-o-up"></i>
-                  <small>{{ story.date_moderated|date:"d/m/y" }}</small>
-                {% elif story.is_pending %}
+                  <small>{{ event.date_moderated|date:"d/m/y" }}</small>
+                {% elif event.is_pending %}
                   <small>Pending</small>
-                {% elif story.is_removed %}
+                {% elif event.is_removed %}
                   <i class="fa fa-thumbs-o-down"></i>
-                  <small>{{ story.date_moderated|date:"d/m/y" }}</small>
+                  <small>{{ event.date_moderated|date:"d/m/y" }}</small>
                 {% endif %}
               </td>
             </tr>

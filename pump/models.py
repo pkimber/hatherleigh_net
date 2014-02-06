@@ -83,6 +83,9 @@ class Event(PumpContentModel):
         verbose_name = 'Event'
         verbose_name_plural = 'Events'
 
+    def _get_content_set(self):
+        return self.container.event_set
+
     def __unicode__(self):
         return unicode('{}'.format(self.title))
 

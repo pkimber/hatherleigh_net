@@ -23,6 +23,8 @@ from cms.views import (
 
 from .forms import (
     EventAnonForm,
+    EventEmptyForm,
+    EventTrustForm,
     StoryAnonForm,
     StoryEmptyForm,
     StoryTrustForm,
@@ -67,6 +69,86 @@ class EventAnonCreateView(ContentCreateView):
 
     def get_success_url(self):
         return reverse('project.home')
+
+
+class EventDetailView(
+        LoginRequiredMixin, CheckPermMixin, BaseMixin, DetailView):
+
+    model = Event
+
+    def get_context_data(self, **kwargs):
+        context = super(EventDetailView, self).get_context_data(**kwargs)
+        self._check_perm(self.object)
+        context.update(dict(
+            user_can_edit=self.object.user_can_edit(self.request.user),
+        ))
+        return context
+
+
+class EventListView(LoginRequiredMixin, BaseMixin, ListView):
+    """List of events for a logged in user.
+
+    We have a 'context_object_name' because the 'pending' method returns a
+    list of event instances, not a queryset.
+
+    """
+
+    context_object_name = 'event_list'
+    template_name = 'pump/event_list.html'
+
+    def get_queryset(self):
+        section = get_news_section()
+        if self.request.user.is_staff:
+            result = Event.objects.pending(section)
+        else:
+            result = Event.objects.pending(
+                section,
+                dict(user=self.request.user)
+            )
+        return result
+
+
+class EventPublishView(LoginRequiredMixin, ContentPublishView):
+
+    form_class = EventEmptyForm
+    model = Event
+    template_name = 'pump/event_publish_form.html'
+
+    def get_success_url(self):
+        return reverse('pump.event.list')
+
+
+class EventTrustCreateView(LoginRequiredMixin, ContentCreateView):
+
+    form_class = EventTrustForm
+    model = Event
+    template_name = 'pump/event_form_wysiwyg.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        return super(EventTrustCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('pump.event.list')
+
+
+class EventUpdateView(
+        LoginRequiredMixin, CheckPermMixin, ContentUpdateView):
+
+    model = Event
+    form_class = EventTrustForm
+    template_name = 'pump/event_form_wysiwyg.html'
+
+    def get_object(self, *args, **kwargs):
+        obj = super(EventUpdateView, self).get_object(*args, **kwargs)
+        self._check_perm(obj)
+        if not obj.user_can_edit(self.request.user):
+            raise PermissionDenied()
+        return obj
+
+    def get_success_url(self):
+        return reverse('pump.event.list')
 
 
 class DashboardView(LoginRequiredMixin, BaseMixin, TemplateView):
