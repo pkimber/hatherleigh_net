@@ -15,7 +15,7 @@ from pump.tests.scenario import (
 )
 
 
-class TestStoryViewPerm(PermTestCase):
+class TestViewStoryPerm(PermTestCase):
 
     def setUp(self):
         default_scenario_login()

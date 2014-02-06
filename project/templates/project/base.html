@@ -8,13 +8,19 @@
 
 {% block menu %}
   {% if user.is_active %}
+    <li {% if path == '/pump/' %}class="pure-menu-selected"{% endif %}>
+      <a href="{% url 'pump.dashboard' %}">
+        <i class="fa fa-dashboard"></i>
+        Dashboard
+      </a>
+    </li>
     <li {% if 'create' in path %}class="pure-menu-selected"{% endif %}>
       <a href="{% url 'pump.story.create.trust' %}">
         <i class="fa fa-edit"></i>
-        Create
+        Create story
       </a>
     </li>
-    <li {% if path == '/story/' %}class="pure-menu-selected"{% endif %}>
+    <li {% if path == '/pump/story/' %}class="pure-menu-selected"{% endif %}>
       <a href="{% url 'pump.story.list' %}">
         <i class="fa fa-list"></i>
         List news
@@ -39,6 +45,10 @@
 {% block title %}
   hatherleigh.net
 {% endblock title %}
+
+{% block sub_title %}
+  hatherleigh.net
+{% endblock sub_title %}
 
 {% block heading %}
   hatherleigh.net

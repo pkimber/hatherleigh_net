@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import (
     DetailView,
     ListView,
+    TemplateView,
 )
 
 from braces.views import (
@@ -66,6 +67,33 @@ class EventAnonCreateView(ContentCreateView):
 
     def get_success_url(self):
         return reverse('project.home')
+
+
+class DashboardView(LoginRequiredMixin, BaseMixin, TemplateView):
+    """List of events and stories for the logged in user."""
+
+    template_name = 'pump/dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+        section = get_news_section()
+        if self.request.user.is_staff:
+            event_list = Event.objects.pending(section)
+            story_list = Story.objects.pending(section)
+        else:
+            event_list = Event.objects.pending(
+                section,
+                dict(user=self.request.user)
+            )
+            story_list = Story.objects.pending(
+                section,
+                dict(user=self.request.user)
+            )
+        context.update(dict(
+            event_list=event_list,
+            story_list=story_list,
+        ))
+        return context
 
 
 class StoryAnonCreateView(ContentCreateView):

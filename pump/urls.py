@@ -3,6 +3,7 @@ from django.conf.urls import (
 )
 
 from .views import (
+    DashboardView,
     EventAnonCreateView,
     StoryAnonCreateView,
     StoryDetailView,
@@ -36,6 +37,10 @@ urlpatterns = patterns(
         name='pump.story.detail'
         ),
     url(regex=r'^$',
+        view=DashboardView.as_view(),
+        name='pump.dashboard'
+        ),
+    url(regex=r'^story/$',
         view=StoryListView.as_view(),
         name='pump.story.list'
         ),

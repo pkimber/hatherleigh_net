@@ -10,7 +10,7 @@ from login.tests.scenario import (
 from pump.tests.scenario import default_scenario_pump
 
 
-class TestStoryView(TestCase):
+class TestViewStory(TestCase):
 
     def setUp(self):
         default_scenario_login()
