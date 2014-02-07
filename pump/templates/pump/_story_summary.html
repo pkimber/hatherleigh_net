@@ -1,0 +1,55 @@
+<table class="pure-table pure-table-bordered">
+  <tbody>
+    <tr>
+      <td>Title</td>
+      <td>
+        {% if user_can_edit %}
+          <a href="{% url 'pump.story.update' story.pk %}">
+            <i class="fa fa-edit"></i>
+            {{ story.title }}
+          </a>
+        {% else %}
+          {{ story.title }}
+        {% endif %}
+      </td>
+    </tr>
+    {% if story.is_published %}
+      <tr>
+        <td>Published</td>
+        <td>
+          {{ story.user_moderated }}
+          <small>on {{ story.date_moderated|date:"l d/m/y H:i" }}</small>
+        </td>
+      </tr>
+    {% endif %}
+    {% if story.removed %}
+      <tr>
+        <td>
+          <strong>Removed</strong>
+        </td>
+        <td>
+          {{ story.user_moderated }}
+          <small>on {{ story.date_moderated|date:"l d/m/y H:i" }}</small>
+        </td>
+      </tr>
+    {% endif %}
+    <tr>
+      <td>Author</td>
+      <td>{{ story.author }}</td>
+    </tr>
+    {% if story.email %}
+      <tr>
+        <td>email</td>
+        <td>{{ story.email|urlize }}</td>
+      </tr>
+    {% endif %}
+    <tr>
+      <td>Created</td>
+      <td>{{ story.created|date:"l d/m/y H:i" }}</td>
+    </tr>
+    <tr>
+      <td>Area</td>
+      <td>{{ story.area.name }}</td>
+    </tr>
+  </tbody>
+</table>

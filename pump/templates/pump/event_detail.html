@@ -18,7 +18,7 @@
           <li>
             <a href="{% url 'pump.event.list' %}">
               <i class="fa fa-list"></i>
-              Stories
+              Events
             </a>
           </li>
           <li>
@@ -36,66 +36,10 @@
           </li>
         </ul>
       </div>
-      <table class="pure-table pure-table-bordered">
-        <tbody>
-          <tr>
-            <td>Title</td>
-            <td>
-              {% if user_can_edit %}
-                <a href="{% url 'pump.event.update' event.pk %}">
-                  <i class="fa fa-edit"></i>
-                  {{ event.title }}
-                </a>
-              {% else %}
-                {{ event.title }}
-              {% endif %}
-            </td>
-          </tr>
-          <tr>
-            <td>Date</td>
-            <td>{{ event.event_date|date:"l d/m/Y" }}</td>
-          </tr>
-          <tr>
-            <td>Time</td>
-            <td>{{ event.event_time|time:"H:i" }}</td>
-          </tr>
-          {% if event.is_published %}
-            <tr>
-              <td>Published</td>
-              <td>
-                {{ event.user_moderated }}
-                <small>on {{ event.date_moderated|date:"l d/m/y H:i" }}</small>
-              </td>
-            </tr>
-          {% endif %}
-          {% if event.removed %}
-            <tr>
-              <td>
-                <strong>Removed</strong>
-              </td>
-              <td>
-                {{ event.user_moderated }}
-                <small>on {{ event.date_moderated|date:"l d/m/y H:i" }}</small>
-              </td>
-            </tr>
-          {% endif %}
-          <tr>
-            <td>Author</td>
-            <td>{{ event.author }}</td>
-          </tr>
-          <tr>
-            <td>Created</td>
-            <td>{{ event.created|date:"l d/m/y H:i" }}</td>
-          </tr>
-          <tr>
-            <td>Area</td>
-            <td>{{ event.area.name }}</td>
-          </tr>
-        </tbody>
-      </table>
+      {% include 'pump/_event_summary.html' %}
       <br />
       {% if event.picture %}
-        <img id="image_picture" src="{% thumbnail event.picture 300x500 crop %}" />
+        <img id="image_picture" src="{% thumbnail event.picture 100x100 crop %}" />
       {% endif %}
       {% autoescape off %}
         {{ event.description }}

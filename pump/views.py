@@ -156,7 +156,7 @@ class EventUpdateView(
         return obj
 
     def get_success_url(self):
-        return reverse('pump.event.list')
+        return self.object.get_absolute_url()
 
 
 class DashboardView(LoginRequiredMixin, BaseMixin, TemplateView):
@@ -295,4 +295,4 @@ class StoryUpdateView(
         return obj
 
     def get_success_url(self):
-        return reverse('pump.story.list')
+        return self.object.get_absolute_url()

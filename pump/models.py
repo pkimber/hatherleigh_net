@@ -101,6 +101,9 @@ class Event(PumpContentModel):
     def __unicode__(self):
         return unicode('{}'.format(self.title))
 
+    def get_absolute_url(self):
+        return reverse('pump.event.detail', args=[self.pk])
+
 reversion.register(Event)
 
 

@@ -11,6 +11,7 @@
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
+      {% include 'pump/_event_summary.html' %}
       {% include '_form.html' with legend='Are you sure you want to publish this event?' submit='Publish' %}
     </div>
   </div>

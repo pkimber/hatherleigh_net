@@ -1,17 +1,18 @@
 {% extends "pump/base.html" %}
 
 {% block sub_title %}
-  Reject news story
+  Remove event
 {% endblock sub_title %}
 
 {% block sub_heading %}
-  Reject news story
+  Remove event
 {% endblock sub_heading %}
 
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
-      {% include '_form.html' with legend='Are you sure you want to reject this story?' submit='Reject' %}
+      {% include 'pump/_event_summary.html' %}
+      {% include '_form.html' with legend='Are you sure you want to remove this event?' submit='Remove' %}
     </div>
   </div>
 {% endblock content %}
