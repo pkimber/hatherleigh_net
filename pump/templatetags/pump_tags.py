@@ -14,7 +14,7 @@ register = template.Library()
 def event_list():
     section = get_section_event()
     return dict(
-        story_list=Event.objects.published(section).order_by(
+        event_list=Event.objects.published(section).order_by(
             'event_date', 'event_time'
         ),
     )
