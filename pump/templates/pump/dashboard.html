@@ -84,6 +84,7 @@
             <th>ID</th>
             <th>Title</th>
             <th>Date</th>
+            <th>Time</th>
             <th>Area</th>
             <th>Author</th>
             <th>Moderated</th>
@@ -104,6 +105,8 @@
               </td>
               <td>
                 {{ event.event_date|date:"d/m/Y" }}
+              </td>
+              <td>
                 {{ event.event_time|time:"H:i" }}
               </td>
               <td>{{ event.area.name }}</td>

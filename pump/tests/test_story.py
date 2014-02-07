@@ -1,7 +1,14 @@
 from django.test import TestCase
 
 from cms.tests.model_maker import make_container
-from pump.models import get_news_section
+from login.tests.scenario import (
+    default_scenario_login,
+    get_user_staff,
+    get_user_web,
+    user_contractor,
+)
+
+from pump.models import get_section_story
 from pump.tests.model_maker import make_story
 from pump.tests.scenario import (
     default_scenario_pump,
@@ -42,7 +49,7 @@ class TestStory(TestCase):
 
     def test_create_anon(self):
         make_story(
-            make_container(get_news_section(), 1),
+            make_container(get_section_story(), 1),
             name='Pat',
             email='code@pkimber.net',
             area=get_area_hatherleigh(),
@@ -52,7 +59,7 @@ class TestStory(TestCase):
 
     def test_create_trust(self):
         make_story(
-            make_container(get_news_section(), 1),
+            make_container(get_section_story(), 1),
             user=get_user_staff(),
             area=get_area_hatherleigh(),
             title='10 Pub Barrel Pull Success',
@@ -63,7 +70,7 @@ class TestStory(TestCase):
         self.assertRaises(
             ValueError,
             make_story,
-            make_container(get_news_section(), 1),
+            make_container(get_section_story(), 1),
             area=get_area_hatherleigh(),
             title='Alpha Male',
             description='completed their 300 mile paddle',

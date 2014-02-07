@@ -8,10 +8,7 @@ from django.views.generic import (
     TemplateView,
 )
 
-from braces.views import (
-    LoginRequiredMixin,
-    StaffuserRequiredMixin,
-)
+from braces.views import LoginRequiredMixin
 
 from base.view_utils import BaseMixin
 from cms.views import (
@@ -31,7 +28,8 @@ from .forms import (
 )
 from .models import (
     Event,
-    get_news_section,
+    get_section_event,
+    get_section_story,
     Story,
 )
 
@@ -97,7 +95,7 @@ class EventListView(LoginRequiredMixin, BaseMixin, ListView):
     template_name = 'pump/event_list.html'
 
     def get_queryset(self):
-        section = get_news_section()
+        section = get_section_event()
         if self.request.user.is_staff:
             result = Event.objects.pending(section)
         else:
@@ -158,17 +156,18 @@ class DashboardView(LoginRequiredMixin, BaseMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
-        section = get_news_section()
+        section_event = get_section_event()
+        section_story = get_section_story()
         if self.request.user.is_staff:
-            event_list = Event.objects.pending(section)
-            story_list = Story.objects.pending(section)
+            event_list = Event.objects.pending(section_event)
+            story_list = Story.objects.pending(section_story)
         else:
             event_list = Event.objects.pending(
-                section,
+                section_event,
                 dict(user=self.request.user)
             )
             story_list = Story.objects.pending(
-                section,
+                section_story,
                 dict(user=self.request.user)
             )
         context.update(dict(
@@ -239,7 +238,7 @@ class StoryListView(LoginRequiredMixin, BaseMixin, ListView):
     template_name = 'pump/story_list.html'
 
     def get_queryset(self):
-        section = get_news_section()
+        section = get_section_story()
         if self.request.user.is_staff:
             result = Story.objects.pending(section)
         else:

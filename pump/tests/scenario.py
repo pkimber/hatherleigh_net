@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+from datetime import (
+    date,
+    time,
+)
+
+from cms.models import (
+    Layout,
+    Page,
+    Section,
+)
 from cms.tests.model_maker import (
     make_container,
     make_layout,
@@ -12,10 +23,16 @@ from login.tests.scenario import (
 
 from pump.models import (
     Area,
+    get_section_event,
+    get_section_story,
+    LAYOUT_EVENT,
+    LAYOUT_STORY,
+    PAGE_HOME,
     Story,
 )
 from pump.tests.model_maker import (
     make_area,
+    make_event,
     make_story,
 )
 
@@ -28,8 +45,13 @@ def get_area_hatherleigh():
     return Area.objects.get(name='Hatherleigh')
 
 
-def get_container_news():
-    return 
+def get_event_history():
+    return Event.objects.get(title='History Society')
+
+
+def get_event_microchip():
+    return Event.objects.get(title='Free Microchipping for Dogs')
+
 
 def get_story_craft_fair():
     return Story.objects.get(title='Craft Fair')
@@ -39,15 +61,41 @@ def get_story_market_fire():
     return Story.objects.get(title='Market Offices burnt down')
 
 
+def default_section(verbose=None):
+    try:
+        page = Page.objects.get(slug=PAGE_HOME)
+    except Page.DoesNotExist:
+        page = make_page('Home', 0)
+        if verbose: print 'created page: {}'.format(page)
+    try:
+        layout_event = Layout.objects.get(slug=LAYOUT_EVENT)
+    except Layout.DoesNotExist:
+        layout_event = make_layout('Event')
+        if verbose: print 'created layout: {}'.format(layout_event)
+    try:
+        layout_story = Layout.objects.get(slug=LAYOUT_STORY)
+    except Layout.DoesNotExist:
+        layout_story = make_layout('Story')
+        if verbose: print 'created layout: {}'.format(layout_story)
+    try:
+        get_section_event()
+    except Section.DoesNotExist:
+        make_section(page, layout_event)
+        if verbose: print "created event section"
+    try:
+        get_section_story()
+    except Section.DoesNotExist:
+        make_section(page, layout_story)
+        if verbose: print "created story section"
+
+
 def default_scenario_pump():
+    default_section()
     default_moderate_state()
     make_area('Hatherleigh')
     make_area('Exbourne')
-    page = make_page('Home', 0)
-    body = make_layout('Body')
-    section = make_section(page, body)
     make_story(
-        make_container(section, 1),
+        make_container(get_section_story(), 1),
         user=get_user_staff(),
         area=get_area_hatherleigh(),
         title='MGs descend on Hatherleigh',
@@ -59,7 +107,7 @@ def default_scenario_pump():
         )
     )
     make_story(
-        make_container(section, 2),
+        make_container(get_section_story(), 2),
         user=get_user_web(),
         area=get_area_hatherleigh(),
         title='Market Offices burnt down',
@@ -74,7 +122,7 @@ def default_scenario_pump():
         )
     )
     make_story(
-        make_container(section, 3),
+        make_container(get_section_story(), 3),
         name='Pat',
         email='code@pkimber.net',
         area=get_area_exbourne(),
@@ -85,5 +133,40 @@ def default_scenario_pump():
             "August. Judges had the difficult task of awarding rosettes for "
             "1st, 2nd & 3rd places in each of the 24 classes, ranging from "
             "knitting to metal work."
+        )
+    )
+    make_event(
+        make_container(get_section_event(), 1),
+        name='Pat',
+        email='code@pkimber.net',
+        area=get_area_exbourne(),
+        title='Free Microchipping for Dogs',
+        event_date=date(2014, 1, 31),
+        event_time=time(19, 30),
+        description=(
+            "Free Microchipping The law is changing! As from the 6th April "
+            "2016 you must have your dog microchipped - please visit us at "
+            "At The Burrow Cafe, Exbourne on Friday 7th February, between "
+            "10am - 12noon, from the Dogs Trust & West Devon Borough Council "
+            "Customer Service Advisor to help with all your council and many "
+            "public service enquiries Everyone Welcome"
+        )
+    )
+    make_event(
+        make_container(get_section_event(), 2),
+        name='Pat',
+        email='code@pkimber.net',
+        area=get_area_exbourne(),
+        title='History Society',
+        event_date=date(2014, 1, 31),
+        event_time=time(19, 30),
+        description=(
+            "On Monday February 10th at 7:30pm in Old Schools Dr. Janet Few "
+            "will be giving an illustrated talk entitled ‘Farm, Fish, Faith "
+            "and Family’. As usual all are welcome (non-members £2) The "
+            "History Society is currently investigating Hatherleigh’s "
+            "prehistoric history and is keen to hear of any finds relating "
+            "to this period in particular worked flints such as the one "
+            "recently found by a pupil at the School."
         )
     )

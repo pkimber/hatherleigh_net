@@ -4,6 +4,7 @@ from base.tests.model_maker import clean_and_save
 
 from pump.models import (
     Area,
+    Event,
     Story,
 )
 
@@ -15,6 +16,14 @@ def make_area(name, **kwargs):
     )
     defaults.update(kwargs)
     return clean_and_save(Area(**defaults))
+
+
+def make_event(container, **kwargs):
+    defaults = dict(
+        container=container,
+    )
+    defaults.update(kwargs)
+    return clean_and_save(Event(**defaults))
 
 
 def make_story(container, **kwargs):

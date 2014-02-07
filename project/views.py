@@ -5,14 +5,7 @@ from django.views.generic import (
 )
 
 from base.view_utils import BaseMixin
-from cms.models import (
-    Container,
-)
-
-from pump.models import (
-    get_news_section,
-    Story,
-)
+from cms.models import Container
 
 
 class HomeView(BaseMixin, TemplateView):

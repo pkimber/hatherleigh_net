@@ -10,10 +10,22 @@ from cms.models import (
 )
 
 
-def get_news_section():
+PAGE_HOME = 'home'
+LAYOUT_EVENT = 'event'
+LAYOUT_STORY = 'story'
+
+
+def get_section_event():
     return Section.objects.get(
-        page__slug='home',
-        layout__slug='body',
+        page__slug=PAGE_HOME,
+        layout__slug=LAYOUT_EVENT,
+    )
+
+
+def get_section_story():
+    return Section.objects.get(
+        page__slug=PAGE_HOME,
+        layout__slug=LAYOUT_STORY,
     )
 
 

@@ -2,6 +2,12 @@ from django.conf.urls import (
     patterns, url
 )
 
+from .models import (
+    LAYOUT_EVENT,
+    LAYOUT_STORY,
+    PAGE_HOME,
+)
+
 from .views import (
     DashboardView,
     EventAnonCreateView,
@@ -28,12 +34,12 @@ urlpatterns = patterns(
         ),
     url(regex=r'^event/create/anon/$',
         view=EventAnonCreateView.as_view(),
-        kwargs=dict(page='home', layout='body'),
+        kwargs=dict(page=PAGE_HOME, layout=LAYOUT_EVENT),
         name='pump.event.create.anon'
         ),
     url(regex=r'^event/create/trust/$',
         view=EventTrustCreateView.as_view(),
-        kwargs=dict(page='home', layout='body'),
+        kwargs=dict(page=PAGE_HOME, layout=LAYOUT_EVENT),
         name='pump.event.create.trust'
         ),
     url(regex=r'^event/(?P<pk>\d+)/$',
@@ -50,12 +56,12 @@ urlpatterns = patterns(
         ),
     url(regex=r'^story/create/anon/$',
         view=StoryAnonCreateView.as_view(),
-        kwargs=dict(page='home', layout='body'),
+        kwargs=dict(page=PAGE_HOME, layout=LAYOUT_STORY),
         name='pump.story.create.anon'
         ),
     url(regex=r'^story/create/trust/$',
         view=StoryTrustCreateView.as_view(),
-        kwargs=dict(page='home', layout='body'),
+        kwargs=dict(page=PAGE_HOME, layout=LAYOUT_STORY),
         name='pump.story.create.trust'
         ),
     url(regex=r'^story/(?P<pk>\d+)/$',
@@ -74,7 +80,7 @@ urlpatterns = patterns(
         view=StoryPublishView.as_view(),
         name='pump.story.publish'
         ),
-    url(regex=r'^(?P<pk>\d+)/remove/$',
+    url(regex=r'^story/(?P<pk>\d+)/remove/$',
         view=StoryRemoveView.as_view(),
         name='pump.story.remove'
         ),
