@@ -1,4 +1,3 @@
 -r base.txt
-pkimber-base==0.0.31
-pkimber-login==0.0.12
-pkimber-story==0.0.12
+pkimber-base==0.0.43
+pkimber-login==0.0.14

@@ -4,7 +4,7 @@ django-haystack==2.1.0
 django-reversion==1.8.0
 django-sendfile==0.3.4
 django-simple-captcha==0.4.1
-Django==1.6.1
+Django==1.6.2
 docutils
 easy-thumbnails==1.4
 git+https://github.com/bryanchow/django-templatepages.git#templatepages
