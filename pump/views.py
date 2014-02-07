@@ -116,6 +116,16 @@ class EventPublishView(LoginRequiredMixin, ContentPublishView):
         return reverse('pump.event.list')
 
 
+class EventRemoveView(LoginRequiredMixin, ContentRemoveView):
+
+    form_class = EventEmptyForm
+    model = Event
+    template_name = 'pump/event_remove_form.html'
+
+    def get_success_url(self):
+        return reverse('pump.event.list')
+
+
 class EventTrustCreateView(LoginRequiredMixin, ContentCreateView):
 
     form_class = EventTrustForm

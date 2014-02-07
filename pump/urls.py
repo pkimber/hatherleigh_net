@@ -14,6 +14,7 @@ from .views import (
     EventDetailView,
     EventListView,
     EventPublishView,
+    EventRemoveView,
     EventTrustCreateView,
     EventUpdateView,
     StoryAnonCreateView,
@@ -49,6 +50,10 @@ urlpatterns = patterns(
     url(regex=r'^event/(?P<pk>\d+)/publish/$',
         view=EventPublishView.as_view(),
         name='pump.event.publish'
+        ),
+    url(regex=r'^event/(?P<pk>\d+)/remove/$',
+        view=EventRemoveView.as_view(),
+        name='pump.event.remove'
         ),
     url(regex=r'^event/(?P<pk>\d+)/edit/$',
         view=EventUpdateView.as_view(),

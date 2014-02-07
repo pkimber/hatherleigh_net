@@ -23,6 +23,7 @@ from login.tests.scenario import (
 
 from pump.models import (
     Area,
+    Event,
     get_section_event,
     get_section_story,
     LAYOUT_EVENT,
@@ -137,8 +138,7 @@ def default_scenario_pump():
     )
     make_event(
         make_container(get_section_event(), 1),
-        name='Pat',
-        email='code@pkimber.net',
+        user=get_user_web(),
         area=get_area_exbourne(),
         title='Free Microchipping for Dogs',
         event_date=date(2014, 1, 31),
