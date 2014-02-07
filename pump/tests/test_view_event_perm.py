@@ -68,8 +68,8 @@ class TestEventViewPerm(PermTestCase):
             reverse('pump.event.remove', kwargs={'pk': event.pk})
         )
 
-    #def test_update_perm(self):
-    #    event = get_event_market_fire()
-    #    self.assert_logged_in(
-    #        reverse('pump.event.update', kwargs={'pk': event.pk})
-    #    )
+    def test_update_perm(self):
+        event = get_event_microchip()
+        self.assert_logged_in(
+            reverse('pump.event.update', kwargs={'pk': event.pk})
+        )
