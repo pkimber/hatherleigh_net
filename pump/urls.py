@@ -44,7 +44,7 @@ urlpatterns = patterns(
         view=EventPublishView.as_view(),
         name='pump.event.publish'
         ),
-    url(regex=r'^story/(?P<pk>\d+)/edit/$',
+    url(regex=r'^event/(?P<pk>\d+)/edit/$',
         view=EventUpdateView.as_view(),
         name='pump.event.update'
         ),
