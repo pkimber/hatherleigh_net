@@ -1,5 +1,7 @@
 recursive-include project/static *
 recursive-include project/templates *
+recursive-include pump/static *
+recursive-include pump/templates *
 
 include LICENSE
 include manage.py

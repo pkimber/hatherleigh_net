@@ -20,7 +20,7 @@ def get_readme():
 
 setup(
     name='pkimber-hatherleigh-net',
-    packages=['project', 'project.templatetags', 'project.management', 'project.management.commands', 'settings'],
+    packages=['project', 'project.templatetags', 'project.tests', 'project.management', 'project.management.commands', 'settings', 'pump', 'pump.templatetags', 'pump.tests', 'pump.management', 'pump.management.commands'],
     package_data={
         'project': [
             'static/*.*',
@@ -29,8 +29,16 @@ setup(
             'templates/*.*',
             'templates/project/*.*',
         ],
+
+        'pump': [
+            'static/*.*',
+            'static/pump/*.*',
+            'static/pump/css/*.*',
+            'templates/*.*',
+            'templates/pump/*.*',
+        ],
     },
-    version='0.0.35',
+    version='0.0.36',
     description='hatherleigh web site',
     author='Patrick Kimber',
     author_email='code@pkimber.net',
