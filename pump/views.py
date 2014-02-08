@@ -250,11 +250,19 @@ class StoryListView(LoginRequiredMixin, BaseMixin, ListView):
     def get_queryset(self):
         section = get_section_story()
         if self.request.user.is_staff:
-            result = Story.objects.pending(section)
+            result = Story.objects.pending(
+                section,
+                dict(
+                    order_by='-container__order',
+                )
+            )
         else:
             result = Story.objects.pending(
                 section,
-                dict(user=self.request.user)
+                dict(
+                    order_by='-container__order',
+                    user=self.request.user,
+                )
             )
         return result
 

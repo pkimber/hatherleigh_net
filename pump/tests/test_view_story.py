@@ -4,9 +4,14 @@ from django.test import TestCase
 from base.tests.test_utils import PermTestCase
 from login.tests.scenario import (
     default_scenario_login,
+    get_user_staff,
     get_user_web,
 )
 
+from pump.models import (
+    get_section_story,
+    Story,
+)
 from pump.tests.scenario import default_scenario_pump
 
 
@@ -25,3 +30,17 @@ class TestViewStory(TestCase):
     def test_create_anon_no_html_editor(self):
         response = self.client.get(reverse('pump.story.create.anon'))
         self.assertNotIn('CKEDITOR', response.content)
+
+    def test_pending_order(self):
+        user = get_user_staff()
+        self.client.login(username=user.username, password=user.username)
+        response = self.client.get(reverse('pump.story.list'))
+        pending = response.context_data['story_list']
+        self.assertListEqual(
+            [
+                'Craft Fair',
+                'Market Offices burnt down',
+                'MGs descend on Hatherleigh',
+            ],
+            [t.title for t in pending]
+        )
