@@ -39,7 +39,6 @@ class TestEventViewPerm(PermTestCase):
             captcha_1='PASSED',
         )
         response = self.client.post(url, data)
-        print response
         self.assertEqual(response.status_code, 302)
         Event.objects.get(name='Patrick')
 
