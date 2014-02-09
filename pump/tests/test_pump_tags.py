@@ -27,26 +27,15 @@ class TestPumpTags(TestCase):
         default_scenario_login()
         default_scenario_pump()
 
-    def test_event_not_past(self):
-        """Make sure template tag doesn't show old events."""
+    def test_event_published_order(self):
+        """Make sure template tag shows all events.
+
+        Must include todays events, but not events in the past
+
+        """
         self._publish(get_event_history())
         self._publish(get_event_microchip())
         self._publish(get_event_temp())
-        self._publish(get_event_temp_today())
-        result = event_list()
-        published = result.get('event_list')
-        self.assertListEqual(
-            [
-                'Temp Title Today',
-                'History Society',
-                'Free Microchipping for Dogs',
-            ],
-            [t.title for t in published]
-        )
-
-    def test_event_published_order(self):
-        self._publish(get_event_history())
-        self._publish(get_event_microchip())
         self._publish(get_event_temp_today())
         result = event_list()
         published = result.get('event_list')
