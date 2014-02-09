@@ -62,6 +62,10 @@ def get_story_market_fire():
     return Story.objects.get(title='Market Offices burnt down')
 
 
+def get_story_mg_descend():
+    return Story.objects.get(title='MGs descend on Hatherleigh')
+
+
 def default_section(verbose=None):
     try:
         page = Page.objects.get(slug=PAGE_HOME)
@@ -95,6 +99,7 @@ def default_scenario_pump():
     default_moderate_state()
     make_area('Hatherleigh')
     make_area('Exbourne')
+    # story
     make_story(
         make_container(get_section_story(), 1),
         user=get_user_staff(),
@@ -136,6 +141,7 @@ def default_scenario_pump():
             "knitting to metal work."
         )
     )
+    # event
     make_event(
         make_container(get_section_event(), 1),
         user=get_user_web(),

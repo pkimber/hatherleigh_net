@@ -19,3 +19,6 @@ class TestEventView(TestCase):
     def test_create_anon_no_html_editor(self):
         response = self.client.get(reverse('pump.event.create.anon'))
         self.assertNotIn('CKEDITOR', response.content)
+
+    def test_pending_order(self):
+        pass
