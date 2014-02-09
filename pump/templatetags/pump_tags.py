@@ -1,3 +1,5 @@
+from datetime import date
+
 from django import template
 
 from pump.models import (
@@ -14,8 +16,13 @@ register = template.Library()
 def event_list():
     section = get_section_event()
     return dict(
-        event_list=Event.objects.published(section).order_by(
-            'event_date', 'event_time'
+        event_list=Event.objects.published(
+            section
+        ).filter(
+            event_date__gte=date.today()
+        ).order_by(
+            'event_date',
+            'event_time',
         ),
     )
 

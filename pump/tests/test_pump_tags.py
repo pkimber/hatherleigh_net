@@ -5,9 +5,16 @@ from login.tests.scenario import (
     get_user_staff,
 )
 
-from pump.templatetags.pump_tags import story_list
+from pump.templatetags.pump_tags import (
+    event_list,
+    story_list,
+)
 from pump.tests.scenario import (
     default_scenario_pump,
+    get_event_history,
+    get_event_microchip,
+    get_event_temp,
+    get_event_temp_today,
     get_story_craft_fair,
     get_story_market_fire,
     get_story_mg_descend,
@@ -20,7 +27,39 @@ class TestPumpTags(TestCase):
         default_scenario_login()
         default_scenario_pump()
 
-    def test_published_order(self):
+    def test_event_not_past(self):
+        """Make sure template tag doesn't show old events."""
+        self._publish(get_event_history())
+        self._publish(get_event_microchip())
+        self._publish(get_event_temp())
+        self._publish(get_event_temp_today())
+        result = event_list()
+        published = result.get('event_list')
+        self.assertListEqual(
+            [
+                'Temp Title Today',
+                'History Society',
+                'Free Microchipping for Dogs',
+            ],
+            [t.title for t in published]
+        )
+
+    def test_event_published_order(self):
+        self._publish(get_event_history())
+        self._publish(get_event_microchip())
+        self._publish(get_event_temp_today())
+        result = event_list()
+        published = result.get('event_list')
+        self.assertListEqual(
+            [
+                'Temp Title Today',
+                'History Society',
+                'Free Microchipping for Dogs',
+            ],
+            [t.title for t in published]
+        )
+
+    def test_story_published_order(self):
         self._publish(get_story_craft_fair())
         self._publish(get_story_market_fire())
         self._publish(get_story_mg_descend())

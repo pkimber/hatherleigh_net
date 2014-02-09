@@ -3,6 +3,7 @@ from datetime import (
     date,
     time,
 )
+from dateutil.relativedelta import relativedelta
 
 from cms.models import (
     Layout,
@@ -52,6 +53,14 @@ def get_event_history():
 
 def get_event_microchip():
     return Event.objects.get(title='Free Microchipping for Dogs')
+
+
+def get_event_temp():
+    return Event.objects.get(title='Temp Title')
+
+
+def get_event_temp_today():
+    return Event.objects.get(title='Temp Title Today')
 
 
 def get_story_craft_fair():
@@ -142,12 +151,13 @@ def default_scenario_pump():
         )
     )
     # event
+    event_date = date.today() + relativedelta(days=8)
     make_event(
         make_container(get_section_event(), 1),
         user=get_user_web(),
         area=get_area_exbourne(),
         title='Free Microchipping for Dogs',
-        event_date=date(2014, 1, 31),
+        event_date=event_date,
         event_time=time(19, 30),
         description=(
             "Free Microchipping The law is changing! As from the 6th April "
@@ -158,13 +168,14 @@ def default_scenario_pump():
             "public service enquiries Everyone Welcome"
         )
     )
+    event_date = date.today() + relativedelta(days=4)
     make_event(
         make_container(get_section_event(), 2),
         name='Pat',
         email='code@pkimber.net',
         area=get_area_exbourne(),
         title='History Society',
-        event_date=date(2014, 1, 31),
+        event_date=event_date,
         event_time=time(19, 30),
         description=(
             "On Monday February 10th at 7:30pm in Old Schools Dr. Janet Few "
@@ -174,5 +185,31 @@ def default_scenario_pump():
             "prehistoric history and is keen to hear of any finds relating "
             "to this period in particular worked flints such as the one "
             "recently found by a pupil at the School."
+        )
+    )
+    event_date = date.today()
+    make_event(
+        make_container(get_section_event(), 3),
+        name='Pat',
+        email='code@pkimber.net',
+        area=get_area_hatherleigh(),
+        title='Temp Title Today',
+        event_date=event_date,
+        event_time=time(19, 30),
+        description=(
+            "Temp Description for Today"
+        )
+    )
+    event_date = date.today() + relativedelta(days=-5)
+    make_event(
+        make_container(get_section_event(), 4),
+        name='Pat',
+        email='code@pkimber.net',
+        area=get_area_hatherleigh(),
+        title='Temp Title',
+        event_date=event_date,
+        event_time=time(19, 30),
+        description=(
+            "Temp Description"
         )
     )
