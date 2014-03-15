@@ -1,3 +1,6 @@
+# -*- encoding: utf-8 -*-
+
+from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
@@ -20,11 +23,11 @@ class TestViewStory(TestCase):
         web = get_user_web()
         self.client.login(username=web.username, password=web.username)
         response = self.client.get(reverse('pump.story.create.trust'))
-        self.assertIn('CKEDITOR', response.content)
+        self.assertIn('CKEDITOR', str(response.content))
 
     def test_create_anon_no_html_editor(self):
         response = self.client.get(reverse('pump.story.create.anon'))
-        self.assertNotIn('CKEDITOR', response.content)
+        self.assertNotIn('CKEDITOR', str(response.content))
 
     def test_pending_order(self):
         user = get_user_staff()

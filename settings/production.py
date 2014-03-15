@@ -1,7 +1,11 @@
+# -*- encoding: utf-8 -*-
+
+from __future__ import unicode_literals
 from .base import *
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = DEBUG
 
 if get_env_variable_bool('SSL'):
     SESSION_COOKIE_SECURE = True

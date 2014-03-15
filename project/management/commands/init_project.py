@@ -1,3 +1,6 @@
+# -*- encoding: utf-8 -*-
+
+from __future__ import unicode_literals
 """
 This command is designed to be run multiple times.  It will clear out data, and
 then re-insert e.g. for setting up the main menu navigation.

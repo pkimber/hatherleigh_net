@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 # -*- coding: utf-8 -*-
 from datetime import (
     date,
@@ -80,27 +81,32 @@ def default_section(verbose=None):
         page = Page.objects.get(slug=PAGE_HOME)
     except Page.DoesNotExist:
         page = make_page('Home', 0)
-        if verbose: print 'created page: {}'.format(page)
+        if verbose:
+            print('created page: {}'.format(page))
     try:
         layout_event = Layout.objects.get(slug=LAYOUT_EVENT)
     except Layout.DoesNotExist:
         layout_event = make_layout('Event')
-        if verbose: print 'created layout: {}'.format(layout_event)
+        if verbose:
+            print('created layout: {}'.format(layout_event))
     try:
         layout_story = Layout.objects.get(slug=LAYOUT_STORY)
     except Layout.DoesNotExist:
         layout_story = make_layout('Story')
-        if verbose: print 'created layout: {}'.format(layout_story)
+        if verbose:
+            print('created layout: {}'.format(layout_story))
     try:
         get_section_event()
     except Section.DoesNotExist:
         make_section(page, layout_event)
-        if verbose: print "created event section"
+        if verbose:
+            print("created event section")
     try:
         get_section_story()
     except Section.DoesNotExist:
         make_section(page, layout_story)
-        if verbose: print "created story section"
+        if verbose:
+            print("created story section")
 
 
 def default_scenario_pump():

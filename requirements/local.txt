@@ -1,6 +1,9 @@
 -r base.txt
+-e ../../app/base
+-e ../../app/cms
+-e ../../app/login
 fabric
-gitpython==0.3.1-beta2
+gitpython
 hgapi
 ipdb
 pytest-django

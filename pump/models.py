@@ -1,3 +1,6 @@
+# -*- encoding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -38,8 +41,8 @@ class Area(models.Model):
         verbose_name = 'Area'
         verbose_name_plural = 'Areas'
 
-    def __unicode__(self):
-        return unicode('{}'.format(self.name))
+    def __str__(self):
+        return '{}'.format(self.name)
 
 reversion.register(Area)
 
@@ -98,8 +101,8 @@ class Event(PumpContentModel):
     def _get_content_set(self):
         return self.container.event_set
 
-    def __unicode__(self):
-        return unicode('{}'.format(self.title))
+    def __str__(self):
+        return '{}'.format(self.title)
 
     def get_absolute_url(self):
         return reverse('pump.event.detail', args=[self.pk])
@@ -122,8 +125,8 @@ class Story(PumpContentModel):
     def _get_content_set(self):
         return self.container.story_set
 
-    def __unicode__(self):
-        return unicode('{}'.format(self.title))
+    def __str__(self):
+        return '{}'.format(self.title)
 
     def get_absolute_url(self):
         return reverse('pump.story.detail', args=[self.pk])

@@ -1,3 +1,6 @@
+# -*- encoding: utf-8 -*-
+
+from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
@@ -18,7 +21,7 @@ class TestEventView(TestCase):
 
     def test_create_anon_no_html_editor(self):
         response = self.client.get(reverse('pump.event.create.anon'))
-        self.assertNotIn('CKEDITOR', response.content)
+        self.assertNotIn('CKEDITOR', str(response.content))
 
     def test_pending_order(self):
         pass
