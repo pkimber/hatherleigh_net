@@ -35,7 +35,7 @@
           {% for story in story_list %}
             <tr valign="top">
               <td>
-                {{ story.container.pk }}
+                {{ story.block.pk }}
               </td>
               <td>
                 <a href="{% url 'pump.story.detail' story.pk %}">

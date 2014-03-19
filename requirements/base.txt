@@ -1,4 +1,7 @@
 bleach
+django-braces
+django-haystack
+django-reversion
 django-sendfile
 django-simple-captcha
 Django==1.6.2
@@ -6,10 +9,7 @@ docutils
 easy-thumbnails
 git+https://github.com/BradWhittington/django-mailgun.git#egg=django_mailgun
 git+https://github.com/bryanchow/django-templatepages.git#templatepages
-git+https://github.com/pkimber/django-braces.git#egg=braces
-git+https://github.com/pkimber/django-haystack.git#egg=haystack
 git+https://github.com/pkimber/django-mailgun-incoming.git#egg=mailgun_incoming
-git+https://github.com/pkimber/django-reversion.git#egg=reversion
 Pillow
 psycopg2
 python-dateutil

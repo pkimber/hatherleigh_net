@@ -6,18 +6,15 @@ from datetime import (
 )
 from dateutil.relativedelta import relativedelta
 
-from cms.models import (
-    Layout,
+from block.models import (
     Page,
     Section,
 )
-from cms.tests.model_maker import (
-    make_container,
-    make_layout,
+from block.tests.model_maker import (
     make_page,
     make_section,
 )
-from cms.tests.scenario import default_moderate_state
+from block.tests.scenario import default_moderate_state
 from login.tests.scenario import (
     get_user_staff,
     get_user_web,
@@ -26,17 +23,18 @@ from login.tests.scenario import (
 from pump.models import (
     Area,
     Event,
-    get_section_event,
-    get_section_story,
-    LAYOUT_EVENT,
-    LAYOUT_STORY,
+    get_page_home,
+    get_section_body,
     PAGE_HOME,
+    SECTION_BODY,
     Story,
 )
 from pump.tests.model_maker import (
     make_area,
     make_event,
+    make_event_block,
     make_story,
+    make_story_block,
 )
 
 
@@ -84,29 +82,11 @@ def default_section(verbose=None):
         if verbose:
             print('created page: {}'.format(page))
     try:
-        layout_event = Layout.objects.get(slug=LAYOUT_EVENT)
-    except Layout.DoesNotExist:
-        layout_event = make_layout('Event')
-        if verbose:
-            print('created layout: {}'.format(layout_event))
-    try:
-        layout_story = Layout.objects.get(slug=LAYOUT_STORY)
-    except Layout.DoesNotExist:
-        layout_story = make_layout('Story')
-        if verbose:
-            print('created layout: {}'.format(layout_story))
-    try:
-        get_section_event()
+        section_event = Section.objects.get(slug=SECTION_BODY)
     except Section.DoesNotExist:
-        make_section(page, layout_event)
+        section_event = make_section('Body')
         if verbose:
-            print("created event section")
-    try:
-        get_section_story()
-    except Section.DoesNotExist:
-        make_section(page, layout_story)
-        if verbose:
-            print("created story section")
+            print('created section: {}'.format(section_event))
 
 
 def default_scenario_pump():
@@ -116,7 +96,8 @@ def default_scenario_pump():
     make_area('Exbourne')
     # story
     make_story(
-        make_container(get_section_story(), 1),
+        block=make_story_block(get_page_home(), get_section_body()),
+        order=1,
         user=get_user_staff(),
         area=get_area_hatherleigh(),
         title='MGs descend on Hatherleigh',
@@ -128,7 +109,8 @@ def default_scenario_pump():
         )
     )
     make_story(
-        make_container(get_section_story(), 2),
+        block=make_story_block(get_page_home(), get_section_body()),
+        order=2,
         user=get_user_web(),
         area=get_area_hatherleigh(),
         title='Market Offices burnt down',
@@ -143,7 +125,8 @@ def default_scenario_pump():
         )
     )
     make_story(
-        make_container(get_section_story(), 3),
+        block=make_story_block(get_page_home(), get_section_body()),
+        order=3,
         name='Pat',
         email='code@pkimber.net',
         area=get_area_exbourne(),
@@ -159,7 +142,8 @@ def default_scenario_pump():
     # event
     event_date = date.today() + relativedelta(days=8)
     make_event(
-        make_container(get_section_event(), 1),
+        block=make_event_block(get_page_home(), get_section_body()),
+        order=1,
         user=get_user_web(),
         area=get_area_exbourne(),
         title='Free Microchipping for Dogs',
@@ -176,7 +160,8 @@ def default_scenario_pump():
     )
     event_date = date.today() + relativedelta(days=4)
     make_event(
-        make_container(get_section_event(), 2),
+        block=make_event_block(get_page_home(), get_section_body()),
+        order=2,
         name='Pat',
         email='code@pkimber.net',
         area=get_area_exbourne(),
@@ -195,7 +180,8 @@ def default_scenario_pump():
     )
     event_date = date.today()
     make_event(
-        make_container(get_section_event(), 3),
+        block=make_event_block(get_page_home(), get_section_body()),
+        order=3,
         name='Pat',
         email='code@pkimber.net',
         area=get_area_hatherleigh(),
@@ -208,7 +194,8 @@ def default_scenario_pump():
     )
     event_date = date.today() + relativedelta(days=-5)
     make_event(
-        make_container(get_section_event(), 4),
+        block=make_event_block(get_page_home(), get_section_body()),
+        order=4,
         name='Pat',
         email='code@pkimber.net',
         area=get_area_hatherleigh(),

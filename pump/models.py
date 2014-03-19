@@ -7,29 +7,24 @@ from django.db import models
 
 import reversion
 
-from cms.models import (
+from block.models import (
+    BlockModel,
     ContentModel,
+    Page,
     Section,
 )
 
 
 PAGE_HOME = 'home'
-LAYOUT_EVENT = 'event'
-LAYOUT_STORY = 'story'
+SECTION_BODY = 'body'
 
 
-def get_section_event():
-    return Section.objects.get(
-        page__slug=PAGE_HOME,
-        layout__slug=LAYOUT_EVENT,
-    )
+def get_page_home():
+    return Page.objects.get(slug=PAGE_HOME)
 
 
-def get_section_story():
-    return Section.objects.get(
-        page__slug=PAGE_HOME,
-        layout__slug=LAYOUT_STORY,
-    )
+def get_section_body():
+    return Section.objects.get(slug=SECTION_BODY)
 
 
 class Area(models.Model):
@@ -48,6 +43,8 @@ reversion.register(Area)
 
 
 class PumpContentModel(ContentModel):
+
+    order = models.IntegerField()
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
@@ -88,8 +85,15 @@ class PumpContentModel(ContentModel):
     author = property(_author)
 
 
+class EventBlock(BlockModel):
+    pass
+
+reversion.register(EventBlock)
+
+
 class Event(PumpContentModel):
     """Event."""
+    block = models.ForeignKey(EventBlock, related_name='content')
     event_date = models.DateField()
     event_time = models.TimeField()
 
@@ -110,14 +114,20 @@ class Event(PumpContentModel):
 reversion.register(Event)
 
 
+class StoryBlock(BlockModel):
+    pass
+
+reversion.register(StoryBlock)
+
+
 class Story(PumpContentModel):
     """News story"""
-    pass
+    block = models.ForeignKey(StoryBlock, related_name='content')
 
     class Meta:
         # cannot put 'unique_together' on abstract base class
         # https://code.djangoproject.com/ticket/16732
-        unique_together = ('container', 'moderate_state')
+        unique_together = ('block', 'moderate_state')
         ordering = ['-created']
         verbose_name = 'Story'
         verbose_name_plural = 'Stories'

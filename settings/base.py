@@ -160,7 +160,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'project',
     'base',
-    'cms',
+    'block',
     'login',
     'pump',
 )

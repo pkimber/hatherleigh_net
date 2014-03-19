@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
-
 from __future__ import unicode_literals
+
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
@@ -14,7 +14,7 @@ from django.views.generic import (
 from braces.views import LoginRequiredMixin
 
 from base.view_utils import BaseMixin
-from cms.views import (
+from block.views import (
     ContentCreateView,
     ContentPublishView,
     ContentRemoveView,
@@ -31,9 +31,11 @@ from .forms import (
 )
 from .models import (
     Event,
-    get_section_event,
-    get_section_story,
+    EventBlock,
+    get_page_home,
+    get_section_body,
     Story,
+    StoryBlock,
 )
 
 
@@ -54,6 +56,7 @@ class CheckPermMixin(object):
 
 class EventAnonCreateView(ContentCreateView):
 
+    block_class = EventBlock
     form_class = EventAnonForm
     model = Event
     template_name = 'pump/event_form_text_only.html'
@@ -98,11 +101,16 @@ class EventListView(LoginRequiredMixin, BaseMixin, ListView):
     template_name = 'pump/event_list.html'
 
     def get_queryset(self):
-        section = get_section_event()
+        page = get_page_home()
+        section = get_section_body()
         if self.request.user.is_staff:
-            result = Event.objects.pending(section)
+            result = Event.objects.pending(
+                page,
+                section,
+            )
         else:
             result = Event.objects.pending(
+                page,
                 section,
                 dict(user=self.request.user)
             )
@@ -131,6 +139,7 @@ class EventRemoveView(LoginRequiredMixin, ContentRemoveView):
 
 class EventTrustCreateView(LoginRequiredMixin, ContentCreateView):
 
+    block_class = EventBlock
     form_class = EventTrustForm
     model = Event
     template_name = 'pump/event_form_wysiwyg.html'
@@ -169,18 +178,20 @@ class DashboardView(LoginRequiredMixin, BaseMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
-        section_event = get_section_event()
-        section_story = get_section_story()
+        page = get_page_home()
+        section = get_section_body()
         if self.request.user.is_staff:
-            event_list = Event.objects.pending(section_event)
-            story_list = Story.objects.pending(section_story)
+            event_list = Event.objects.pending(page, section)
+            story_list = Story.objects.pending(page, section)
         else:
             event_list = Event.objects.pending(
-                section_event,
+                page,
+                section,
                 dict(user=self.request.user)
             )
             story_list = Story.objects.pending(
-                section_story,
+                page,
+                section,
                 dict(user=self.request.user)
             )
         context.update(dict(
@@ -192,6 +203,7 @@ class DashboardView(LoginRequiredMixin, BaseMixin, TemplateView):
 
 class StoryAnonCreateView(ContentCreateView):
 
+    block_class = StoryBlock
     form_class = StoryAnonForm
     model = Story
     template_name = 'pump/story_form_text_only.html'
@@ -212,6 +224,7 @@ class StoryAnonCreateView(ContentCreateView):
 
 class StoryTrustCreateView(LoginRequiredMixin, ContentCreateView):
 
+    block_class = StoryBlock
     form_class = StoryTrustForm
     model = Story
     template_name = 'pump/story_form_wysiwyg.html'
@@ -251,19 +264,22 @@ class StoryListView(LoginRequiredMixin, BaseMixin, ListView):
     template_name = 'pump/story_list.html'
 
     def get_queryset(self):
-        section = get_section_story()
+        page = get_page_home()
+        section = get_section_body()
         if self.request.user.is_staff:
             result = Story.objects.pending(
+                page,
                 section,
                 dict(
-                    order_by='-container__order',
+                    order_by='-order',
                 )
             )
         else:
             result = Story.objects.pending(
+                page,
                 section,
                 dict(
-                    order_by='-container__order',
+                    order_by='-order',
                     user=self.request.user,
                 )
             )

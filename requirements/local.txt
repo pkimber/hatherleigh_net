@@ -1,6 +1,6 @@
 -r base.txt
 -e ../../app/base
--e ../../app/cms
+-e ../../app/block
 -e ../../app/login
 fabric
 gitpython

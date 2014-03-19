@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
-
 from __future__ import unicode_literals
+
 from django.shortcuts import get_object_or_404
 from django.views.generic import (
     DetailView,
@@ -8,7 +8,8 @@ from django.views.generic import (
 )
 
 from base.view_utils import BaseMixin
-from cms.models import Container
+
+from pump.models import Story
 
 
 class HomeView(BaseMixin, TemplateView):
@@ -18,7 +19,7 @@ class HomeView(BaseMixin, TemplateView):
 
 class NewsDetailView(BaseMixin, DetailView):
 
-    model = Container
+    model = Story
     template_name = 'news.html'
 
     def get_context_data(self, **kwargs):
