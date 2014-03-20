@@ -151,9 +151,8 @@ def default_scenario_pump():
             "knitting to metal work."
         )
     )
-    make_story(
+    story = make_story(
         block=make_story_block(get_page_home(), get_section_body()),
-        moderate_state=ModerateState.published(),
         order=4,
         name='Pat',
         email='test@pkimber.net',
@@ -167,6 +166,9 @@ def default_scenario_pump():
             "consultants."
         )
     )
+    story.created = date.today() + relativedelta(months=-1, day=7)
+    story.set_published(get_user_staff())
+    story.save()
     # event
     event_date = date.today() + relativedelta(days=8)
     make_event(

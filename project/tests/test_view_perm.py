@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import date
+
 from django.core.urlresolvers import reverse
 
 from base.tests.test_utils import PermTestCase
@@ -23,8 +25,19 @@ class TestViewPerm(PermTestCase):
         user_contractor()
         default_scenario_pump()
 
-    def test_detail_perm(self):
+    def test_story_detail(self):
         story = get_story_market_planning()
         self.assert_any(
             reverse('project.story.detail', kwargs={'pk': story.block.pk})
+        )
+
+    def test_story_archive(self):
+        self.assert_any(
+            reverse(
+                'project.story.archive',
+                kwargs=dict(
+                    year=date.today().strftime('%Y'),
+                    month=date.today().strftime('%b'),
+                )
+            )
         )

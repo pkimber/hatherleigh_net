@@ -13,5 +13,6 @@ git+https://github.com/pkimber/django-mailgun-incoming.git#egg=mailgun_incoming
 Pillow==2.3.0
 psycopg2==2.5.2
 python-dateutil==2.2
+pytz==2014.1
 PyYAML==3.10
 South==0.8.4

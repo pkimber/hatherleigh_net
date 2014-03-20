@@ -12,6 +12,20 @@
 
 {% block content %}
   <div class="pure-g-r">
+    <div class="pure-u-1">
+      <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+          <li>
+            <a href="{% url 'project.story.archive' today|date:"Y" today|date:"b" %}">
+              <i class="fa fa-list"></i>
+              Story archive (Year, Month)
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="pure-g-r">
     <div class="pure-u-1-2">
       {% story_list %}
     </div>

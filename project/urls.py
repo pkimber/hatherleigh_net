@@ -13,6 +13,7 @@ from django.contrib import admin
 from .views import (
     HomeView,
     StoryDetailView,
+    StoryMonthArchiveView,
 )
 
 
@@ -28,6 +29,10 @@ urlpatterns = patterns(
     url(regex=r'^story/(?P<pk>\d+)/$',
         view=StoryDetailView.as_view(),
         name='project.story.detail'
+        ),
+    url(regex=r'^story/(?P<year>\d{4})/(?P<month>[-\w]+)/$',
+        view=StoryMonthArchiveView.as_view(),
+        name='project.story.archive'
         ),
     url(regex=r'^',
         view=include('login.urls')
