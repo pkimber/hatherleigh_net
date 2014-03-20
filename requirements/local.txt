@@ -7,4 +7,6 @@ gitpython
 hgapi
 ipdb
 pytest-django
+pytest-flakes
+pytest-pep8
 walkdir

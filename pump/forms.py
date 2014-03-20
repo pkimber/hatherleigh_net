@@ -88,6 +88,7 @@ class EventTrustForm(EventForm):
             'picture': forms.FileInput,
         }
 
+
 class StoryEmptyForm(forms.ModelForm):
 
     class Meta:

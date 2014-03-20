@@ -11,7 +11,6 @@ from django.contrib.sites.models import Site
 
 from base.tests.model_maker import init_site
 from block.models import (
-    ModerateState,
     Page,
     Section,
 )

@@ -13,7 +13,6 @@ from login.tests.scenario import (
 
 from pump.tests.scenario import (
     default_scenario_pump,
-    get_site_hatherleigh,
     get_story_market_planning,
 )
 

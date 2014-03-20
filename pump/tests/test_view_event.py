@@ -1,14 +1,10 @@
 # -*- encoding: utf-8 -*-
-
 from __future__ import unicode_literals
+
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
-from base.tests.test_utils import PermTestCase
-from login.tests.scenario import (
-    default_scenario_login,
-    get_user_web,
-)
+from login.tests.scenario import default_scenario_login
 
 from pump.tests.scenario import default_scenario_pump
 

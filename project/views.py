@@ -38,7 +38,6 @@ class StoryMonthArchiveView(BaseMixin, MonthArchiveView):
             page,
             section,
         )
-        return result
 
 
 class StoryDetailView(BaseMixin, DetailView):

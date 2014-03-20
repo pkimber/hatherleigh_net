@@ -24,12 +24,6 @@ from pump.tests.scenario import (
     get_story_craft_fair,
     get_story_market_fire,
 )
-from login.tests.scenario import (
-    default_scenario_login,
-    get_user_staff,
-    get_user_web,
-    user_contractor,
-)
 
 
 class TestStory(TestCase):
@@ -94,7 +88,6 @@ class TestStory(TestCase):
         self.assertTrue(get_story_craft_fair().is_published)
 
     def test_published_not(self):
-        story = get_story_craft_fair()
         self.assertFalse(get_story_craft_fair().is_published)
 
     def test_removed(self):
@@ -104,5 +97,4 @@ class TestStory(TestCase):
         self.assertTrue(get_story_craft_fair().is_removed)
 
     def test_removed_not(self):
-        story = get_story_craft_fair()
         self.assertFalse(get_story_craft_fair().is_removed)
