@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
-
 from __future__ import unicode_literals
+
 from datetime import date
 
 from django import template
@@ -15,8 +15,13 @@ from pump.models import (
 register = template.Library()
 
 
-@register.inclusion_tag('pump/_event_list.html')
+@register.inclusion_tag('_event_list.html')
 def event_list():
+    """List of events.
+
+    The '_event_list.html' template can be found in the ftp folder.
+
+    """
     page = get_page_home()
     section = get_section_body()
     return dict(
@@ -32,8 +37,13 @@ def event_list():
     )
 
 
-@register.inclusion_tag('pump/_story_list.html')
+@register.inclusion_tag('_story_list.html')
 def story_list():
+    """List of events.
+
+    The '_story_list.html' template can be found in the ftp folder.
+
+    """
     page = get_page_home()
     section = get_section_body()
     return dict(
