@@ -9,7 +9,7 @@ from django.views.generic import (
 
 from base.view_utils import BaseMixin
 
-from pump.models import Story
+from pump.models import StoryBlock
 
 
 class HomeView(BaseMixin, TemplateView):
@@ -17,15 +17,15 @@ class HomeView(BaseMixin, TemplateView):
     template_name = 'home.html'
 
 
-class NewsDetailView(BaseMixin, DetailView):
+class StoryDetailView(BaseMixin, DetailView):
 
-    model = Story
-    template_name = 'news.html'
+    model = StoryBlock
+    template_name = 'story.html'
 
     def get_context_data(self, **kwargs):
-        context = super(NewsDetailView, self).get_context_data(**kwargs)
+        context = super(StoryDetailView, self).get_context_data(**kwargs)
         story = get_object_or_404(
-            self.object.story_set,
+            self.object.content,
             moderate_state__slug='published'
         )
         context.update(dict(

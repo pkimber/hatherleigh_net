@@ -36,6 +36,7 @@ class TestViewStory(TestCase):
         pending = response.context_data['story_list']
         self.assertListEqual(
             [
+                'The Market Planning has been Approved',
                 'Craft Fair',
                 'Market Offices burnt down',
                 'MGs descend on Hatherleigh',

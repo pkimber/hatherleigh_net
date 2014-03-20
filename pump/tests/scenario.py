@@ -11,6 +11,7 @@ from django.contrib.sites.models import Site
 
 from base.tests.model_maker import init_site
 from block.models import (
+    ModerateState,
     Page,
     Section,
 )
@@ -70,6 +71,10 @@ def get_story_craft_fair():
 
 def get_story_market_fire():
     return Story.objects.get(title='Market Offices burnt down')
+
+
+def get_story_market_planning():
+    return Story.objects.get(title='The Market Planning has been Approved')
 
 
 def get_story_mg_descend():
@@ -144,6 +149,22 @@ def default_scenario_pump():
             "August. Judges had the difficult task of awarding rosettes for "
             "1st, 2nd & 3rd places in each of the 24 classes, ranging from "
             "knitting to metal work."
+        )
+    )
+    make_story(
+        block=make_story_block(get_page_home(), get_section_body()),
+        moderate_state=ModerateState.published(),
+        order=4,
+        name='Pat',
+        email='test@pkimber.net',
+        site=get_site_hatherleigh(),
+        title='The Market Planning has been Approved',
+        description=(
+            "I had an eye opening experience, last week, that left me "
+            "ashamed of our democracy. The paid planners of the council, "
+            "recommended that the outline planning application for "
+            "Hatherleigh Market be approved as presented by the paid "
+            "consultants."
         )
     )
     # event

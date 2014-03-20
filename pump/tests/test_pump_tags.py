@@ -59,6 +59,7 @@ class TestPumpTags(TestCase):
         published = result.get('story_list')
         self.assertListEqual(
             [
+                'The Market Planning has been Approved',
                 'Craft Fair',
                 'Market Offices burnt down',
                 'MGs descend on Hatherleigh',

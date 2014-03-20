@@ -1,0 +1,28 @@
+{% extends "project/base.html" %}
+
+{% load thumbnail %}
+
+{% block sub_title %}
+  News story
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  {{ story.title }}</p>
+{% endblock sub_heading %}
+
+{% block content %}
+  <div class="pure-g-r">
+    <div class="pure-u-1-2">
+      {% if story.picture %}
+        <img id="image_picture" src="{% thumbnail story.picture 300x500 crop %}" />
+      {% endif %}
+    </div>
+    <div class="pure-u-1-2">
+      <br />
+      {% autoescape off %}
+        <story>{{ story.created|date:"l d/m/y H:i" }}</strong>
+        {{ story.description }}
+      {% endautoescape %}
+    </div>
+  </div>
+{% endblock content %}
