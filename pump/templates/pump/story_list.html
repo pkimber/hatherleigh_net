@@ -44,7 +44,11 @@
                   {% if story.removed %}</del>{% endif %}
                 </a>
               </td>
-              <td>{{ story.area.name }}</td>
+              <td>
+                {% for s in story.site.all %}
+                  {{ s.name }}
+                {% endfor %}
+              </td>
               <td>
                 {{ story.author }}
                 <small> {{ story.created|date:"d/m/Y" }}</small>

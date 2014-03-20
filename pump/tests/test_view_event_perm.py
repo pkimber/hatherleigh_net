@@ -12,7 +12,7 @@ from login.tests.scenario import (
 from pump.models import Event
 from pump.tests.scenario import (
     default_scenario_pump,
-    get_area_hatherleigh,
+    get_site_hatherleigh,
     get_event_history,
     get_event_microchip,
 )
@@ -33,7 +33,7 @@ class TestEventViewPerm(PermTestCase):
         data = dict(
             name='Patrick',
             email='code@pkimber.net',
-            area=get_area_hatherleigh().pk,
+            site=get_site_hatherleigh().pk,
             title='Jazz Night',
             event_date='06/02/2014',
             event_time='18:45',

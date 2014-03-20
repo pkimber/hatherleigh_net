@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
 
@@ -27,21 +28,6 @@ def get_section_body():
     return Section.objects.get(slug=SECTION_BODY)
 
 
-class Area(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100)
-
-    class Meta:
-        ordering = ['name']
-        verbose_name = 'Area'
-        verbose_name_plural = 'Areas'
-
-    def __str__(self):
-        return '{}'.format(self.name)
-
-reversion.register(Area)
-
-
 class PumpContentModel(ContentModel):
 
     order = models.IntegerField()
@@ -49,7 +35,7 @@ class PumpContentModel(ContentModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     name = models.CharField(max_length=100, blank=True)
-    area = models.ForeignKey(Area)
+    site = models.ManyToManyField(Site)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     picture = models.ImageField(upload_to='pump/%Y/%m/%d', blank=True)

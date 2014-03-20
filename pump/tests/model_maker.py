@@ -6,21 +6,11 @@ from django.utils.text import slugify
 from base.tests.model_maker import clean_and_save
 
 from pump.models import (
-    Area,
     Event,
     EventBlock,
     Story,
     StoryBlock,
 )
-
-
-def make_area(name, **kwargs):
-    defaults = dict(
-        name=name,
-        slug=slugify(name),
-    )
-    defaults.update(kwargs)
-    return clean_and_save(Area(**defaults))
 
 
 def make_event_block(page, section, **kwargs):
@@ -32,12 +22,15 @@ def make_event_block(page, section, **kwargs):
     return clean_and_save(EventBlock(**defaults))
 
 
-def make_event(block, **kwargs):
+def make_event(block, site, **kwargs):
     defaults = dict(
         block=block,
     )
     defaults.update(kwargs)
-    return clean_and_save(Event(**defaults))
+    event = clean_and_save(Event(**defaults))
+    event.site.add(site)
+    event.save()
+    return event
 
 
 def make_story_block(page, section, **kwargs):
@@ -49,9 +42,12 @@ def make_story_block(page, section, **kwargs):
     return clean_and_save(StoryBlock(**defaults))
 
 
-def make_story(block, **kwargs):
+def make_story(block, site, **kwargs):
     defaults = dict(
         block=block,
     )
     defaults.update(kwargs)
-    return clean_and_save(Story(**defaults))
+    story = clean_and_save(Story(**defaults))
+    story.site.add(site)
+    story.save()
+    return story

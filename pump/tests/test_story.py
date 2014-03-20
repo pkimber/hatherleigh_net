@@ -20,7 +20,7 @@ from pump.tests.model_maker import (
 )
 from pump.tests.scenario import (
     default_scenario_pump,
-    get_area_hatherleigh,
+    get_site_hatherleigh,
     get_story_craft_fair,
     get_story_market_fire,
 )
@@ -61,7 +61,7 @@ class TestStory(TestCase):
             order=1,
             name='Pat',
             email='code@pkimber.net',
-            area=get_area_hatherleigh(),
+            site=get_site_hatherleigh(),
             title='Alpha Male',
             description='completed their 300 mile paddle',
         )
@@ -71,7 +71,7 @@ class TestStory(TestCase):
             make_story_block(get_page_home(), get_section_body()),
             order=1,
             user=get_user_staff(),
-            area=get_area_hatherleigh(),
+            site=get_site_hatherleigh(),
             title='10 Pub Barrel Pull Success',
             description='10 Pub Pull on Saturday',
         )
@@ -82,7 +82,7 @@ class TestStory(TestCase):
             make_story,
             make_story_block(get_page_home(), get_section_body()),
             order=1,
-            area=get_area_hatherleigh(),
+            site=get_site_hatherleigh(),
             title='Alpha Male',
             description='completed their 300 mile paddle',
         )

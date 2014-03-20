@@ -1,11 +1,15 @@
-from __future__ import unicode_literals
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from datetime import (
     date,
     time,
 )
 from dateutil.relativedelta import relativedelta
 
+from django.contrib.sites.models import Site
+
+from base.tests.model_maker import init_site
 from block.models import (
     Page,
     Section,
@@ -21,7 +25,6 @@ from login.tests.scenario import (
 )
 
 from pump.models import (
-    Area,
     Event,
     get_page_home,
     get_section_body,
@@ -30,7 +33,6 @@ from pump.models import (
     Story,
 )
 from pump.tests.model_maker import (
-    make_area,
     make_event,
     make_event_block,
     make_story,
@@ -38,12 +40,12 @@ from pump.tests.model_maker import (
 )
 
 
-def get_area_exbourne():
-    return Area.objects.get(name='Exbourne')
+def get_site_exbourne():
+    return Site.objects.get(name='Exbourne')
 
 
-def get_area_hatherleigh():
-    return Area.objects.get(name='Hatherleigh')
+def get_site_hatherleigh():
+    return Site.objects.get(name='Hatherleigh')
 
 
 def get_event_history():
@@ -89,17 +91,22 @@ def default_section(verbose=None):
             print('created section: {}'.format(section_event))
 
 
+def default_site(verbose=None):
+    init_site(1, 'Hatherleigh', 'hatherleigh.net')
+    init_site(2, 'Exbourne', 'exbourne.net')
+    init_site(3, 'Jacobstowe', 'jacobstowe.net')
+
+
 def default_scenario_pump():
     default_section()
     default_moderate_state()
-    make_area('Hatherleigh')
-    make_area('Exbourne')
+    default_site()
     # story
     make_story(
         block=make_story_block(get_page_home(), get_section_body()),
         order=1,
         user=get_user_staff(),
-        area=get_area_hatherleigh(),
+        site=get_site_hatherleigh(),
         title='MGs descend on Hatherleigh',
         description=(
             "The Taw and Torridge MG owners club came to Hatherleigh, on "
@@ -112,7 +119,7 @@ def default_scenario_pump():
         block=make_story_block(get_page_home(), get_section_body()),
         order=2,
         user=get_user_web(),
-        area=get_area_hatherleigh(),
+        site=get_site_hatherleigh(),
         title='Market Offices burnt down',
         description=(
             "The market offices burnt down last night. I am sure theories "
@@ -129,7 +136,7 @@ def default_scenario_pump():
         order=3,
         name='Pat',
         email='code@pkimber.net',
-        area=get_area_exbourne(),
+        site=get_site_exbourne(),
         title='Craft Fair',
         description=(
             "Over 200 entries were exhibited at the Hatherleigh Craft Show, "
@@ -145,7 +152,7 @@ def default_scenario_pump():
         block=make_event_block(get_page_home(), get_section_body()),
         order=1,
         user=get_user_web(),
-        area=get_area_exbourne(),
+        site=get_site_exbourne(),
         title='Free Microchipping for Dogs',
         event_date=event_date,
         event_time=time(19, 30),
@@ -164,7 +171,7 @@ def default_scenario_pump():
         order=2,
         name='Pat',
         email='code@pkimber.net',
-        area=get_area_exbourne(),
+        site=get_site_exbourne(),
         title='History Society',
         event_date=event_date,
         event_time=time(19, 30),
@@ -184,7 +191,7 @@ def default_scenario_pump():
         order=3,
         name='Pat',
         email='code@pkimber.net',
-        area=get_area_hatherleigh(),
+        site=get_site_hatherleigh(),
         title='Temp Title Today',
         event_date=event_date,
         event_time=time(19, 30),
@@ -198,7 +205,7 @@ def default_scenario_pump():
         order=4,
         name='Pat',
         email='code@pkimber.net',
-        area=get_area_hatherleigh(),
+        site=get_site_hatherleigh(),
         title='Temp Title',
         event_date=event_date,
         event_time=time(19, 30),

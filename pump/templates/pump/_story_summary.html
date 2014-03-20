@@ -49,7 +49,11 @@
     </tr>
     <tr>
       <td>Area</td>
-      <td>{{ story.area.name }}</td>
+      <td>
+        {% for s in story.site.all %}
+          {{ s.name }}
+        {% endfor %}
+      </td>
     </tr>
   </tbody>
 </table>

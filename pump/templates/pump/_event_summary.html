@@ -57,7 +57,11 @@
     </tr>
     <tr>
       <td>Area</td>
-      <td>{{ event.area.name }}</td>
+      <td>
+        {% for s in event.site.all %}
+          {{ s.name }}
+        {% endfor %}
+      </td>
     </tr>
   </tbody>
 </table>

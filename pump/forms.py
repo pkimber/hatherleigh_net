@@ -60,7 +60,7 @@ class EventAnonForm(EventForm):
         fields = (
             'name',
             'email',
-            'area',
+            'site',
             'event_date',
             'event_time',
             'title',
@@ -77,7 +77,7 @@ class EventTrustForm(EventForm):
     class Meta:
         model = Event
         fields = (
-            'area',
+            'site',
             'event_date',
             'event_time',
             'title',
@@ -129,7 +129,7 @@ class StoryAnonForm(StoryForm):
 
     class Meta:
         model = Story
-        fields = ('name', 'email', 'area', 'title', 'description', 'picture')
+        fields = ('name', 'email', 'site', 'title', 'description', 'picture')
         widgets = {
             'picture': forms.FileInput,
         }
@@ -139,7 +139,7 @@ class StoryTrustForm(StoryForm):
 
     class Meta:
         model = Story
-        fields = ('area', 'title', 'description', 'picture')
+        fields = ('site', 'title', 'description', 'picture')
         widgets = {
             'picture': forms.FileInput,
         }

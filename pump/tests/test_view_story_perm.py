@@ -12,7 +12,7 @@ from login.tests.scenario import (
 from pump.models import Story
 from pump.tests.scenario import (
     default_scenario_pump,
-    get_area_hatherleigh,
+    get_site_hatherleigh,
     get_story_craft_fair,
     get_story_market_fire,
 )
@@ -33,7 +33,7 @@ class TestViewStoryPerm(PermTestCase):
         data = dict(
             name='Patrick',
             email='code@pkimber.net',
-            area=get_area_hatherleigh().pk,
+            site=get_site_hatherleigh().pk,
             title='Chilli Night',
             description='Hot, hot, hot...',
             captcha_0='testing',

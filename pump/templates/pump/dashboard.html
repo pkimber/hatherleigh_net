@@ -44,7 +44,11 @@
                   {% if story.removed %}</del>{% endif %}
                 </a>
               </td>
-              <td>{{ story.area.name }}</td>
+              <td>
+                {% for s in story.site.all %}
+                  {{ s.name }}
+                {% endfor %}
+              </td>
               <td>
                 {{ story.author }}
                 <small> {{ story.created|date:"d/m/Y" }}</small>
@@ -109,7 +113,11 @@
               <td>
                 {{ event.event_time|time:"H:i" }}
               </td>
-              <td>{{ event.area.name }}</td>
+              <td>
+                {% for s in event.site.all %}
+                  {{ s.name }}
+                {% endfor %}
+              </td>
               <td>
                 {{ event.author }}
                 <small> {{ event.created|date:"d/m/Y" }}</small>
