@@ -38,7 +38,7 @@ setup(
             'templates/pump/*.*',
         ],
     },
-    version='0.0.40',
+    version='0.0.41',
     description='hatherleigh web site',
     author='Patrick Kimber',
     author_email='code@pkimber.net',
