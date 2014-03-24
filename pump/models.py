@@ -82,7 +82,7 @@ class Event(PumpContentModel):
 
     block = models.ForeignKey(EventBlock, related_name='content')
     event_date = models.DateField()
-    event_time = models.TimeField()
+    event_time = models.TimeField(help_text='(24 hour clock e.g. 14:30)')
 
     class Meta:
         ordering = ['modified']
