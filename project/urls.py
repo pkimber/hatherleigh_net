@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import datetime
+
 from django.conf import settings
 from django.conf.urls import (
     include,
@@ -48,7 +50,9 @@ urlpatterns = patterns(
         ),
     url(regex=r'^article/',
         view=include('templatepages.urls'),
-        ),
+        kwargs=dict(
+            extra_context=dict(today=datetime.today(),)
+        )),
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

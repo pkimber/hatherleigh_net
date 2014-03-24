@@ -19,6 +19,12 @@
             django-templatepages
           </a>
         </p>
+        <p>
+          <a href="{% url 'project.story.archive' today|date:"Y" today|date:"b" %}">
+            <i class="fa fa-list"></i>
+            Story archive (Year, Month)
+          </a>
+        </p>
     </div>
   </div>
 {% endblock content %}
