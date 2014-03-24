@@ -20,7 +20,7 @@
       <td>
         <span class="small_subtext">
           <font color="#CC0033">
-            <b>{{ story.created|date:"M j Y" }} : </b>
+            <b>{{ story.story_date|date:"M j Y" }} : </b>
           </font>
           {% autoescape off %}
             {{ story.description|truncatewords_html:160 }}

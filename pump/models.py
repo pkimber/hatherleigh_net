@@ -79,6 +79,7 @@ reversion.register(EventBlock)
 
 class Event(PumpContentModel):
     """Event."""
+
     block = models.ForeignKey(EventBlock, related_name='content')
     event_date = models.DateField()
     event_time = models.TimeField()
@@ -108,13 +109,15 @@ reversion.register(StoryBlock)
 
 class Story(PumpContentModel):
     """News story"""
+
     block = models.ForeignKey(StoryBlock, related_name='content')
+    story_date = models.DateTimeField()
 
     class Meta:
         # cannot put 'unique_together' on abstract base class
         # https://code.djangoproject.com/ticket/16732
         unique_together = ('block', 'moderate_state')
-        ordering = ['-created']
+        ordering = ['-story_date']
         verbose_name = 'Story'
         verbose_name_plural = 'Stories'
 

@@ -26,7 +26,7 @@ class HomeView(BaseMixin, TemplateView):
 class StoryMonthArchiveView(BaseMixin, MonthArchiveView):
 
     allow_empty = True
-    date_field = 'created'
+    date_field = 'story_date'
     make_object_list = True
     allow_future = True
     template_name = 'story_archive_month.html'

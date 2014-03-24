@@ -51,6 +51,6 @@ def story_list():
             page,
             section,
         ).order_by(
-            '-created'
+            '-story_date'
         ),
     )

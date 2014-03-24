@@ -29,7 +29,7 @@
             {{ event.email|urlize }}
           {% endif %}
           <small>
-          on {{ event.created|date:"l d/m/y H:i" }}
+          on {{ event.block.created|date:"l d/m/y H:i" }}
           </small>
         </p>
       {% endif %}

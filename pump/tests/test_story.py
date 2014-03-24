@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import datetime
+
 from django.test import TestCase
 
 from login.tests.scenario import (
@@ -52,10 +54,11 @@ class TestStory(TestCase):
     def test_create_anon(self):
         make_story(
             make_story_block(get_page_home(), get_section_body()),
+            get_site_hatherleigh(),
             order=1,
+            story_date=datetime.now(),
             name='Pat',
             email='code@pkimber.net',
-            site=get_site_hatherleigh(),
             title='Alpha Male',
             description='completed their 300 mile paddle',
         )
@@ -63,9 +66,10 @@ class TestStory(TestCase):
     def test_create_trust(self):
         make_story(
             make_story_block(get_page_home(), get_section_body()),
+            get_site_hatherleigh(),
             order=1,
+            story_date=datetime.now(),
             user=get_user_staff(),
-            site=get_site_hatherleigh(),
             title='10 Pub Barrel Pull Success',
             description='10 Pub Pull on Saturday',
         )
@@ -76,25 +80,8 @@ class TestStory(TestCase):
             make_story,
             make_story_block(get_page_home(), get_section_body()),
             order=1,
+            story_date=datetime.now(),
             site=get_site_hatherleigh(),
             title='Alpha Male',
             description='completed their 300 mile paddle',
         )
-
-    def test_published(self):
-        story = get_story_craft_fair()
-        story.set_published(get_user_staff())
-        story.save()
-        self.assertTrue(get_story_craft_fair().is_published)
-
-    def test_published_not(self):
-        self.assertFalse(get_story_craft_fair().is_published)
-
-    def test_removed(self):
-        story = get_story_craft_fair()
-        story.set_removed(get_user_staff())
-        story.save()
-        self.assertTrue(get_story_craft_fair().is_removed)
-
-    def test_removed_not(self):
-        self.assertFalse(get_story_craft_fair().is_removed)

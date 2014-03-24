@@ -20,7 +20,7 @@
     <div class="pure-u-1-2">
       <br />
       <h1>{{ story.title }}</h1>
-      <strong>{{ story.created|date:"l d/m/y H:i" }}</strong>
+      <strong>{{ story.story_date|date:"l d/m/y H:i" }}</strong>
       {% autoescape off %}
         {{ story.description }}
       {% endautoescape %}

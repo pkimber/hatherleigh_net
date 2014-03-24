@@ -51,7 +51,7 @@
               </td>
               <td>
                 {{ story.author }}
-                <small> {{ story.created|date:"d/m/Y" }}</small>
+                <small> {{ story.story_date|date:"d/m/Y" }}</small>
               </td>
               <td>
                 {% if story.is_published %}
@@ -120,7 +120,7 @@
               </td>
               <td>
                 {{ event.author }}
-                <small> {{ event.created|date:"d/m/Y" }}</small>
+                <small> {{ event.block.created|date:"d/m/Y" }}</small>
               </td>
               <td>
                 {% if event.is_published %}

@@ -13,7 +13,7 @@ from login.tests.scenario import (
 
 from pump.tests.scenario import (
     default_scenario_pump,
-    get_story_market_planning,
+    get_story_market_planning_published,
 )
 
 
@@ -25,7 +25,7 @@ class TestViewPerm(PermTestCase):
         default_scenario_pump()
 
     def test_story_detail(self):
-        story = get_story_market_planning()
+        story = get_story_market_planning_published()
         self.assert_any(
             reverse('project.story.detail', kwargs={'pk': story.block.pk})
         )

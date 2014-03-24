@@ -29,7 +29,7 @@
             {{ story.email|urlize }}
           {% endif %}
           <small>
-          on {{ story.created|date:"l d/m/y H:i" }}
+          on {{ story.story_date|date:"l d/m/y H:i" }}
           </small>
         </p>
       {% endif %}

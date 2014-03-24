@@ -68,5 +68,4 @@ class TestPumpTags(TestCase):
         )
 
     def _publish(self, story):
-        story.set_published(get_user_staff())
-        story.save()
+        story.block.publish(get_user_staff())

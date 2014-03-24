@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import datetime
+
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -207,6 +209,11 @@ class StoryAnonCreateView(ContentCreateView):
     model = Story
     template_name = 'pump/story_form_text_only.html'
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.story_date = datetime.now()
+        return super(StoryAnonCreateView, self).form_valid(form)
+
     def get(self, request, *args, **kwargs):
         """
         If a user is logged in (and active), they shouldn't be using this
@@ -230,6 +237,7 @@ class StoryTrustCreateView(LoginRequiredMixin, ContentCreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
+        self.object.story_date = datetime.now()
         self.object.user = self.request.user
         return super(StoryTrustCreateView, self).form_valid(form)
 

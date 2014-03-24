@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from datetime import (
     date,
+    datetime,
     time,
 )
 from dateutil.relativedelta import relativedelta
@@ -11,6 +12,7 @@ from django.contrib.sites.models import Site
 
 from base.tests.model_maker import init_site
 from block.models import (
+    ModerateState,
     Page,
     Section,
 )
@@ -72,8 +74,11 @@ def get_story_market_fire():
     return Story.objects.get(title='Market Offices burnt down')
 
 
-def get_story_market_planning():
-    return Story.objects.get(title='The Market Planning has been Approved')
+def get_story_market_planning_published():
+    return Story.objects.get(
+        moderate_state=ModerateState._published(),
+        title='The Market Planning has been Approved'
+    )
 
 
 def get_story_mg_descend():
@@ -107,10 +112,11 @@ def default_scenario_pump():
     default_site()
     # story
     make_story(
-        block=make_story_block(get_page_home(), get_section_body()),
+        make_story_block(get_page_home(), get_section_body()),
+        get_site_hatherleigh(),
         order=1,
+        story_date=datetime.today(),
         user=get_user_staff(),
-        site=get_site_hatherleigh(),
         title='MGs descend on Hatherleigh',
         description=(
             "The Taw and Torridge MG owners club came to Hatherleigh, on "
@@ -120,10 +126,11 @@ def default_scenario_pump():
         )
     )
     make_story(
-        block=make_story_block(get_page_home(), get_section_body()),
+        make_story_block(get_page_home(), get_section_body()),
+        get_site_hatherleigh(),
         order=2,
+        story_date=datetime.today(),
         user=get_user_web(),
-        site=get_site_hatherleigh(),
         title='Market Offices burnt down',
         description=(
             "The market offices burnt down last night. I am sure theories "
@@ -136,11 +143,12 @@ def default_scenario_pump():
         )
     )
     make_story(
-        block=make_story_block(get_page_home(), get_section_body()),
+        make_story_block(get_page_home(), get_section_body()),
+        get_site_exbourne(),
         order=3,
+        story_date=datetime.today(),
         name='Pat',
         email='code@pkimber.net',
-        site=get_site_exbourne(),
         title='Craft Fair',
         description=(
             "Over 200 entries were exhibited at the Hatherleigh Craft Show, "
@@ -150,12 +158,15 @@ def default_scenario_pump():
             "knitting to metal work."
         )
     )
-    story = make_story(
-        block=make_story_block(get_page_home(), get_section_body()),
+    story_block = make_story_block(get_page_home(), get_section_body())
+    story_date = datetime.now() + relativedelta(months=-1, day=7)
+    make_story(
+        story_block,
+        get_site_hatherleigh(),
         order=4,
+        story_date=story_date,
         name='Pat',
         email='test@pkimber.net',
-        site=get_site_hatherleigh(),
         title='The Market Planning has been Approved',
         description=(
             "I had an eye opening experience, last week, that left me "
@@ -165,16 +176,14 @@ def default_scenario_pump():
             "consultants."
         )
     )
-    story.created = date.today() + relativedelta(months=-1, day=7)
-    story.set_published(get_user_staff())
-    story.save()
+    story_block.publish(get_user_staff())
     # event
     event_date = date.today() + relativedelta(days=8)
     make_event(
-        block=make_event_block(get_page_home(), get_section_body()),
+        make_event_block(get_page_home(), get_section_body()),
+        get_site_exbourne(),
         order=1,
         user=get_user_web(),
-        site=get_site_exbourne(),
         title='Free Microchipping for Dogs',
         event_date=event_date,
         event_time=time(19, 30),
@@ -189,11 +198,11 @@ def default_scenario_pump():
     )
     event_date = date.today() + relativedelta(days=4)
     make_event(
-        block=make_event_block(get_page_home(), get_section_body()),
+        make_event_block(get_page_home(), get_section_body()),
+        get_site_exbourne(),
         order=2,
         name='Pat',
         email='code@pkimber.net',
-        site=get_site_exbourne(),
         title='History Society',
         event_date=event_date,
         event_time=time(19, 30),
@@ -209,11 +218,11 @@ def default_scenario_pump():
     )
     event_date = date.today()
     make_event(
-        block=make_event_block(get_page_home(), get_section_body()),
+        make_event_block(get_page_home(), get_section_body()),
+        get_site_hatherleigh(),
         order=3,
         name='Pat',
         email='code@pkimber.net',
-        site=get_site_hatherleigh(),
         title='Temp Title Today',
         event_date=event_date,
         event_time=time(19, 30),
@@ -223,11 +232,11 @@ def default_scenario_pump():
     )
     event_date = date.today() + relativedelta(days=-5)
     make_event(
-        block=make_event_block(get_page_home(), get_section_body()),
+        make_event_block(get_page_home(), get_section_body()),
+        get_site_hatherleigh(),
         order=4,
         name='Pat',
         email='code@pkimber.net',
-        site=get_site_hatherleigh(),
         title='Temp Title',
         event_date=event_date,
         event_time=time(19, 30),
