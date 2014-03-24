@@ -1,4 +1,5 @@
 {% extends "pump/base.html" %}
+{% load block_tags %}
 
 {% block title %}
   News stories
@@ -54,15 +55,7 @@
                 <small> {{ story.story_date|date:"d/m/Y" }}</small>
               </td>
               <td>
-                {% if story.is_published %}
-                  <i class="fa fa-thumbs-o-up"></i>
-                  <small>{{ story.date_moderated|date:"d/m/y" }}</small>
-                {% elif story.is_pending %}
-                  <small>Pending</small>
-                {% elif story.is_removed %}
-                  <i class="fa fa-thumbs-o-down"></i>
-                  <small>{{ story.date_moderated|date:"d/m/y" }}</small>
-                {% endif %}
+                {% block_status story %}
               </td>
             </tr>
           {% endfor %}

@@ -1,4 +1,5 @@
 {% extends "pump/base.html" %}
+{% load block_tags %}
 
 {% block title %}
   Events
@@ -54,15 +55,7 @@
                 <small> {{ event.block.created|date:"d/m/Y" }}</small>
               </td>
               <td>
-                {% if event.is_published %}
-                  <i class="fa fa-thumbs-o-up"></i>
-                  <small>{{ event.date_moderated|date:"d/m/y" }}</small>
-                {% elif event.is_pending %}
-                  <small>Pending</small>
-                {% elif event.is_removed %}
-                  <i class="fa fa-thumbs-o-down"></i>
-                  <small>{{ event.date_moderated|date:"d/m/y" }}</small>
-                {% endif %}
+                {% block_status event %}
               </td>
             </tr>
           {% endfor %}
