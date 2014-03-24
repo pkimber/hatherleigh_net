@@ -7,7 +7,7 @@ then re-insert e.g. for setting up the main menu navigation.
 """
 from django.core.management.base import BaseCommand
 
-from block.tests.scenario import default_moderate_state
+from block.tests.scenario import default_block_state
 from pump.tests.scenario import (
     default_section,
     default_site,
@@ -20,6 +20,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         default_section()
-        default_moderate_state()
+        default_block_state()
         default_site()
         print("Project initialised...")

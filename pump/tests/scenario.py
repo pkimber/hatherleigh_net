@@ -20,7 +20,7 @@ from block.tests.model_maker import (
     make_page,
     make_section,
 )
-from block.tests.scenario import default_moderate_state
+from block.tests.scenario import default_block_state
 from login.tests.scenario import (
     get_user_staff,
     get_user_web,
@@ -108,7 +108,7 @@ def default_site(verbose=None):
 
 def default_scenario_pump():
     default_section()
-    default_moderate_state()
+    default_block_state()
     default_site()
     # story
     make_story(
