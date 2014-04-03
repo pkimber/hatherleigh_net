@@ -22,18 +22,20 @@
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
-      {% if story %}
-        <p>
-          Created by {{ story.author }}
-          {% if story.email %}
-            {{ story.email|urlize }}
-          {% endif %}
-          <small>
-          on {{ story.story_date|date:"l d/m/y H:i" }}
-          </small>
-        </p>
-      {% endif %}
-      {% include '_form.html' with legend='News' multipart=True %}
+      <div class="l-box">
+        {% if story %}
+          <p>
+            Created by {{ story.author }}
+            {% if story.email %}
+              {{ story.email|urlize }}
+            {% endif %}
+            <small>
+            on {{ story.story_date|date:"l d/m/y H:i" }}
+            </small>
+          </p>
+        {% endif %}
+        {% include '_form.html' with legend='News' multipart=True %}
+      </div>
     </div>
   </div>
 {% endblock content %}

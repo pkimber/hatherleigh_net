@@ -18,22 +18,28 @@
   {% for story in object_list %}
     <div class="pure-g-r">
       <div class="pure-u-3-4">
-        <h2>{{ story.title }}</h2>
-        <strong>{{ story.story_date|date:"l d/m/y H:i" }}</strong>
-        {% autoescape off %}
-          {{ story.description }}
-        {% endautoescape %}
+        <div class="l-box">
+          <h2>{{ story.title }}</h2>
+          <strong>{{ story.story_date|date:"l d/m/y H:i" }}</strong>
+          {% autoescape off %}
+            {{ story.description }}
+          {% endautoescape %}
+        </div>
       </div>
       <div class="pure-u-1-4">
-        {% if story.picture %}
-          <img id="image_picture" src="{% thumbnail story.picture 150x250 crop %}" />
-        {% endif %}
+        <div class="l-box">
+          {% if story.picture %}
+            <img id="image_picture" src="{% thumbnail story.picture 150x250 crop %}" />
+          {% endif %}
+        </div>
       </div>
     </div>
   {% empty %}
     <div class="pure-g-r">
       <div class="pure-u-1">
-        Sorry, There were no stories in {{ month|date:"F Y" }}
+        <div class="l-box">
+          Sorry, There were no stories in {{ month|date:"F Y" }}
+        </div>
       </div>
     </div>
   {% endfor %}

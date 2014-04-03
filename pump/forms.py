@@ -16,13 +16,6 @@ from .models import (
 )
 
 
-class EventEmptyForm(forms.ModelForm):
-
-    class Meta:
-        model = Event
-        fields = ()
-
-
 class EventForm(RequiredFieldForm):
     """This is an 'abstract' base class, designed to inherited."""
 
@@ -87,13 +80,6 @@ class EventTrustForm(EventForm):
         widgets = {
             'picture': forms.FileInput,
         }
-
-
-class StoryEmptyForm(forms.ModelForm):
-
-    class Meta:
-        model = Story
-        fields = ()
 
 
 class StoryForm(RequiredFieldForm):

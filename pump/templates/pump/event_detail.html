@@ -22,28 +22,35 @@
             </a>
           </li>
           <li>
-            {% if event.is_published %}
-              <a href="{% url 'pump.event.remove' event.pk %}">
-                <i class="fa fa-thumbs-o-down"></i>
-                Remove
-              </a>
-            {% else %}
+            <a href="{% url 'pump.event.remove' event.pk %}">
+              <i class="fa fa-thumbs-o-down"></i>
+              Remove
+            </a>
+          </li>
+          {% if event.is_pending_added or event.is_pending_edited %}
+            <li>
               <a href="{% url 'pump.event.publish' event.pk %}">
                 <i class="fa fa-thumbs-o-up"></i>
                 Publish
               </a>
-            {% endif %}
-          </li>
+            </li>
+          {% endif %}
         </ul>
       </div>
-      {% include 'pump/_event_summary.html' %}
-      <br />
-      {% if event.picture %}
-        <img id="image_picture" src="{% thumbnail event.picture 100x100 crop %}" />
-      {% endif %}
-      {% autoescape off %}
-        {{ event.description }}
-      {% endautoescape %}
+    </div>
+  </div>
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      <div class="l-box">
+        {% include 'pump/_event_summary.html' with hide_picture=True %}
+        <br />
+        {% if event.picture %}
+          <img id="image_picture" src="{% thumbnail event.picture 100x100 crop %}" />
+        {% endif %}
+        {% autoescape off %}
+          {{ event.description }}
+        {% endautoescape %}
+      </div>
     </div>
   </div>
 {% endblock content %}

@@ -15,6 +15,7 @@ from django.views.generic import (
 from braces.views import LoginRequiredMixin
 
 from base.view_utils import BaseMixin
+from block.forms import ContentEmptyForm
 from block.views import (
     ContentCreateView,
     ContentPublishView,
@@ -24,10 +25,8 @@ from block.views import (
 
 from .forms import (
     EventAnonForm,
-    EventEmptyForm,
     EventTrustForm,
     StoryAnonForm,
-    StoryEmptyForm,
     StoryTrustForm,
 )
 from .models import (
@@ -120,7 +119,7 @@ class EventListView(LoginRequiredMixin, BaseMixin, ListView):
 
 class EventPublishView(LoginRequiredMixin, ContentPublishView):
 
-    form_class = EventEmptyForm
+    form_class = ContentEmptyForm
     model = Event
     template_name = 'pump/event_publish_form.html'
 
@@ -130,7 +129,7 @@ class EventPublishView(LoginRequiredMixin, ContentPublishView):
 
 class EventRemoveView(LoginRequiredMixin, ContentRemoveView):
 
-    form_class = EventEmptyForm
+    form_class = ContentEmptyForm
     model = Event
     template_name = 'pump/event_remove_form.html'
 
@@ -295,7 +294,7 @@ class StoryListView(LoginRequiredMixin, BaseMixin, ListView):
 
 class StoryPublishView(LoginRequiredMixin, ContentPublishView):
 
-    form_class = StoryEmptyForm
+    form_class = ContentEmptyForm
     model = Story
     template_name = 'pump/story_publish_form.html'
 
@@ -306,7 +305,7 @@ class StoryPublishView(LoginRequiredMixin, ContentPublishView):
 class StoryRemoveView(
         LoginRequiredMixin, ContentRemoveView):
 
-    form_class = StoryEmptyForm
+    form_class = ContentEmptyForm
     model = Story
     template_name = 'pump/story_remove_form.html'
 

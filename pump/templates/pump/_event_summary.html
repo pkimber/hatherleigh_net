@@ -1,3 +1,6 @@
+{% load thumbnail %}
+{% load block_tags %}
+
 <table class="pure-table pure-table-bordered">
   <tbody>
     <tr>
@@ -21,26 +24,12 @@
       <td>Time</td>
       <td>{{ event.event_time|time:"H:i" }}</td>
     </tr>
-    {% if event.is_published %}
-      <tr>
-        <td>Published</td>
-        <td>
-          {{ event.user_moderated }}
-          <small>on {{ event.date_moderated|date:"l d/m/y H:i" }}</small>
-        </td>
-      </tr>
-    {% endif %}
-    {% if event.removed %}
-      <tr>
-        <td>
-          <strong>Removed</strong>
-        </td>
-        <td>
-          {{ event.user_moderated }}
-          <small>on {{ event.date_moderated|date:"l d/m/y H:i" }}</small>
-        </td>
-      </tr>
-    {% endif %}
+    <tr>
+      <td>Status</td>
+      <td>
+        {% block_status event %}
+      </td>
+    </tr>
     <tr>
       <td>Author</td>
       <td>{{ event.author }}</td>
@@ -63,5 +52,15 @@
         {% endfor %}
       </td>
     </tr>
+    {% if not hide_picture %}
+      <tr>
+        <td>Picture</td>
+        <td>
+          {% if event.picture %}
+            <img id="image_picture" src="{% thumbnail event.picture 250x250 crop %}" />
+          {% endif %}
+        </td>
+      </tr>
+    {% endif %}
   </tbody>
 </table>

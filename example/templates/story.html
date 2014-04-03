@@ -13,17 +13,21 @@
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1-2">
-      {% if story.picture %}
-        <img id="image_picture" src="{% thumbnail story.picture 300x500 crop %}" />
-      {% endif %}
+      <div class="l-box">
+        {% if story.picture %}
+          <img id="image_picture" src="{% thumbnail story.picture 300x500 crop %}" />
+        {% endif %}
+      </div>
     </div>
     <div class="pure-u-1-2">
-      <br />
-      <h1>{{ story.title }}</h1>
-      <strong>{{ story.story_date|date:"l d/m/y H:i" }}</strong>
-      {% autoescape off %}
-        {{ story.description }}
-      {% endautoescape %}
+      <div class="l-box">
+        <br />
+        <h2>{{ story.title }}</h2>
+        <strong>{{ story.story_date|date:"l d/m/y H:i" }}</strong>
+        {% autoescape off %}
+          {{ story.description }}
+        {% endautoescape %}
+      </div>
     </div>
   </div>
 {% endblock content %}

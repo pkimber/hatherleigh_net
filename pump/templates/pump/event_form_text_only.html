@@ -21,18 +21,20 @@
 {% block content %}
   <div class="pure-g-r">
     <div class="pure-u-1">
-      {% if event %}
-        <p>
-          Created by {{ event.author }}
-          {% if event.email %}
-            {{ event.email|urlize }}
-          {% endif %}
-          <small>
-          on {{ event.block.created|date:"l d/m/y H:i" }}
-          </small>
-        </p>
-      {% endif %}
-      {% include '_form.html' with legend='Event' multipart=True %}
+      <div class="l-box">
+        {% if event %}
+          <p>
+            Created by {{ event.author }}
+            {% if event.email %}
+              {{ event.email|urlize }}
+            {% endif %}
+            <small>
+            on {{ event.block.created|date:"l d/m/y H:i" }}
+            </small>
+          </p>
+        {% endif %}
+        {% include '_form.html' with legend='Event' multipart=True %}
+      </div>
     </div>
   </div>
 {% endblock content %}

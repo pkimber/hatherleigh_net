@@ -22,28 +22,35 @@
             </a>
           </li>
           <li>
-            {% if story.is_published %}
-              <a href="{% url 'pump.story.remove' story.pk %}">
-                <i class="fa fa-thumbs-o-down"></i>
-                Remove
-              </a>
-            {% else %}
+            <a href="{% url 'pump.story.remove' story.pk %}">
+              <i class="fa fa-thumbs-o-down"></i>
+              Remove
+            </a>
+          </li>
+          {% if story.is_pending_added or story.is_pending_edited %}
+            <li>
               <a href="{% url 'pump.story.publish' story.pk %}">
                 <i class="fa fa-thumbs-o-up"></i>
                 Publish
               </a>
-            {% endif %}
-          </li>
+            </li>
+          {% endif %}
         </ul>
       </div>
-      {% include 'pump/_story_summary.html' %}
-      <br />
-      {% if story.picture %}
-        <img id="image_picture" src="{% thumbnail story.picture 300x500 crop %}" />
-      {% endif %}
-      {% autoescape off %}
-        {{ story.description }}
-      {% endautoescape %}
+    </div>
+  </div>
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      <div class="l-box">
+        {% include 'pump/_story_summary.html' with hide_picture=True %}
+        <br />
+        {% if story.picture %}
+          <img id="image_picture" src="{% thumbnail story.picture 300x500 crop %}" />
+        {% endif %}
+        {% autoescape off %}
+          {{ story.description }}
+        {% endautoescape %}
+      </div>
     </div>
   </div>
 {% endblock content %}

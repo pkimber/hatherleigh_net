@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load block_tags %}
 
 <table class="pure-table pure-table-bordered">
   <tbody>
@@ -15,26 +16,12 @@
         {% endif %}
       </td>
     </tr>
-    {% if story.is_published %}
-      <tr>
-        <td>Published</td>
-        <td>
-          {{ story.user_moderated }}
-          <small>on {{ story.date_moderated|date:"l d/m/y H:i" }}</small>
-        </td>
-      </tr>
-    {% endif %}
-    {% if story.removed %}
-      <tr>
-        <td>
-          <strong>Removed</strong>
-        </td>
-        <td>
-          {{ story.user_moderated }}
-          <small>on {{ story.date_moderated|date:"l d/m/y H:i" }}</small>
-        </td>
-      </tr>
-    {% endif %}
+    <tr>
+      <td>Status</td>
+      <td>
+        {% block_status story %}
+      </td>
+    </tr>
     <tr>
       <td>Author</td>
       <td>{{ story.author }}</td>
@@ -57,13 +44,15 @@
         {% endfor %}
       </td>
     </tr>
-    <tr>
-      <td>Picture</td>
-      <td>
-        {% if story.picture %}
-          <img id="image_picture" src="{% thumbnail story.picture 250x250 crop %}" />
-        {% endif %}
-      </td>
-    </tr>
+    {% if not hide_picture %}
+      <tr>
+        <td>Picture</td>
+        <td>
+          {% if story.picture %}
+            <img id="image_picture" src="{% thumbnail story.picture 250x250 crop %}" />
+          {% endif %}
+        </td>
+      </tr>
+    {% endif %}
   </tbody>
 </table>
