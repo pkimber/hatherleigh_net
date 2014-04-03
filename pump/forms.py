@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
-
 from __future__ import unicode_literals
+
 from django import forms
+from django.contrib.sites.models import Site
 
 from captcha.fields import CaptchaField
 
@@ -16,6 +17,12 @@ from .models import (
 )
 
 
+class SiteNameModelChoiceField(forms.ModelMultipleChoiceField):
+
+    def label_from_instance(self, obj):
+        return '{}'.format(obj.name)
+
+
 class EventForm(RequiredFieldForm):
     """This is an 'abstract' base class, designed to inherited."""
 
@@ -26,6 +33,9 @@ class EventForm(RequiredFieldForm):
         )
         self.fields['description'].widget.attrs.update(
             {'class': 'pure-input-2-3'}
+        )
+        self.fields['site'] = SiteNameModelChoiceField(
+            queryset=Site.objects.all().order_by('name')
         )
 
     def clean_description(self):
@@ -92,6 +102,9 @@ class StoryForm(RequiredFieldForm):
         )
         self.fields['description'].widget.attrs.update(
             {'class': 'pure-input-2-3'}
+        )
+        self.fields['site'] = SiteNameModelChoiceField(
+            queryset=Site.objects.all().order_by('name')
         )
 
     def clean_description(self):
