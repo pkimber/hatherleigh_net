@@ -1,3 +1,5 @@
+{% load thumbnail %}
+
 <table class="pure-table pure-table-bordered">
   <tbody>
     <tr>
@@ -53,6 +55,14 @@
         {% for s in story.site.all %}
           {{ s.name }}
         {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td>Picture</td>
+      <td>
+        {% if story.picture %}
+          <img id="image_picture" src="{% thumbnail story.picture 250x250 crop %}" />
+        {% endif %}
       </td>
     </tr>
   </tbody>
