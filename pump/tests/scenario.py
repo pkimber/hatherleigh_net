@@ -42,8 +42,8 @@ from pump.tests.model_maker import (
 )
 
 
-def get_site_exbourne():
-    return Site.objects.get(name='Exbourne')
+def get_site_exbourne_and_jacobstowe():
+    return Site.objects.get(name='Exbourne and Jacobstowe')
 
 
 def get_site_hatherleigh():
@@ -89,7 +89,7 @@ def default_section(verbose=None):
     try:
         page = Page.objects.get(slug=PAGE_HOME)
     except Page.DoesNotExist:
-        page = make_page('Home', 0)
+        page = make_page('Home', 0, 'pump/dashboard.html')
         if verbose:
             print('created page: {}'.format(page))
     try:
@@ -102,8 +102,7 @@ def default_section(verbose=None):
 
 def default_site(verbose=None):
     init_site(1, 'Hatherleigh', 'hatherleigh.net')
-    init_site(2, 'Exbourne', 'exbourne.net')
-    init_site(3, 'Jacobstowe', 'jacobstowe.net')
+    init_site(2, 'Exbourne and Jacobstowe', 'exbournewithjacobstowe.net')
 
 
 def default_scenario_pump():
@@ -144,7 +143,7 @@ def default_scenario_pump():
     )
     make_story(
         make_story_block(get_page_home(), get_section_body()),
-        get_site_exbourne(),
+        get_site_exbourne_and_jacobstowe(),
         order=3,
         story_date=datetime.today(),
         name='Pat',
@@ -181,7 +180,7 @@ def default_scenario_pump():
     event_date = date.today() + relativedelta(days=8)
     make_event(
         make_event_block(get_page_home(), get_section_body()),
-        get_site_exbourne(),
+        get_site_exbourne_and_jacobstowe(),
         order=1,
         user=get_user_web(),
         title='Free Microchipping for Dogs',
@@ -199,7 +198,7 @@ def default_scenario_pump():
     event_date = date.today() + relativedelta(days=4)
     make_event(
         make_event_block(get_page_home(), get_section_body()),
-        get_site_exbourne(),
+        get_site_exbourne_and_jacobstowe(),
         order=2,
         name='Pat',
         email='code@pkimber.net',
