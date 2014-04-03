@@ -23,11 +23,8 @@
             <b>{{ story.story_date|date:"M j Y" }} : </b>
           </font>
           {% autoescape off %}
-            {{ story.description|truncatewords_html:160 }}
+            {{ story.truncated }}
           {% endautoescape %}
-          <a href="{% url 'project.story.detail' story.block.pk %}">
-            Read the full story
-          </a>
         </span>
       </td>
     </tr>

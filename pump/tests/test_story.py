@@ -100,3 +100,7 @@ class TestStory(TestCase):
     def test_is_trusted_not(self):
         story = self._create_anon()
         self.assertFalse(story.is_trusted)
+
+    def test_truncated(self):
+        story = self._create_trust()
+        story.truncated()

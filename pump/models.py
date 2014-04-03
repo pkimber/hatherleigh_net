@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.text import Truncator
 
 import reversion
 
@@ -74,6 +75,17 @@ class PumpContentModel(ContentModel):
         return bool(self.user)
     is_trusted = property(_is_trusted)
 
+    def truncated(self):
+        """truncate content to 160 characters."""
+        anchor = '<a href="{}">Read the full story...</a>'.format(
+            reverse('project.story.detail', kwargs=dict(pk=self.block.pk))
+        )
+        return Truncator(self.description).words(
+            160,
+            html=True,
+            truncate='<br />{}'.format(anchor)
+        )
+
 
 class EventBlock(BlockModel):
     pass
@@ -133,5 +145,8 @@ class Story(PumpContentModel):
 
     def get_absolute_url(self):
         return reverse('pump.story.detail', args=[self.pk])
+
+
+
 
 reversion.register(Story)
