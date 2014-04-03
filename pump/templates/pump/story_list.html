@@ -51,6 +51,9 @@
                 {% endfor %}
               </td>
               <td>
+                {% if story.is_trusted %}
+                  <i class="fa fa-user"></i>
+                {% endif %}
                 {{ story.author }}
                 <small> {{ story.story_date|date:"d/m/Y" }}</small>
               </td>

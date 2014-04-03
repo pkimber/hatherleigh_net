@@ -70,6 +70,10 @@ class PumpContentModel(ContentModel):
         return self.name or self.user.username
     author = property(_author)
 
+    def _is_trusted(self):
+        return bool(self.user)
+    is_trusted = property(_is_trusted)
+
 
 class EventBlock(BlockModel):
     pass

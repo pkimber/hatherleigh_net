@@ -35,6 +35,29 @@ class TestStory(TestCase):
         user_contractor()
         default_scenario_pump()
 
+    def _create_anon(self):
+        return make_story(
+            make_story_block(get_page_home(), get_section_body()),
+            get_site_hatherleigh(),
+            order=1,
+            story_date=datetime.now(),
+            name='Pat',
+            email='code@pkimber.net',
+            title='Alpha Male',
+            description='completed their 300 mile paddle',
+        )
+
+    def _create_trust(self):
+        return make_story(
+            make_story_block(get_page_home(), get_section_body()),
+            get_site_hatherleigh(),
+            order=1,
+            story_date=datetime.now(),
+            user=get_user_staff(),
+            title='10 Pub Barrel Pull Success',
+            description='10 Pub Pull on Saturday',
+        )
+
     def test_can_edit(self):
         """
         A story can be edited by the person who created it (or a member of
@@ -51,28 +74,12 @@ class TestStory(TestCase):
         story = get_story_craft_fair()
         self.assertFalse(story.user_can_edit(get_user_web()))
 
+
     def test_create_anon(self):
-        make_story(
-            make_story_block(get_page_home(), get_section_body()),
-            get_site_hatherleigh(),
-            order=1,
-            story_date=datetime.now(),
-            name='Pat',
-            email='code@pkimber.net',
-            title='Alpha Male',
-            description='completed their 300 mile paddle',
-        )
+        self._create_anon()
 
     def test_create_trust(self):
-        make_story(
-            make_story_block(get_page_home(), get_section_body()),
-            get_site_hatherleigh(),
-            order=1,
-            story_date=datetime.now(),
-            user=get_user_staff(),
-            title='10 Pub Barrel Pull Success',
-            description='10 Pub Pull on Saturday',
-        )
+        self._create_trust()
 
     def test_create_no_user_or_name(self):
         self.assertRaises(
@@ -85,3 +92,11 @@ class TestStory(TestCase):
             title='Alpha Male',
             description='completed their 300 mile paddle',
         )
+
+    def test_is_trusted(self):
+        story = self._create_trust()
+        self.assertTrue(story.is_trusted)
+
+    def test_is_trusted_not(self):
+        story = self._create_anon()
+        self.assertFalse(story.is_trusted)

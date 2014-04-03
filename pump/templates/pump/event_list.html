@@ -51,6 +51,9 @@
                 {% endfor %}
               </td>
               <td>
+                {% if event.is_trusted %}
+                  <i class="fa fa-user"></i>
+                {% endif %}
                 {{ event.author }}
                 <small> {{ event.block.created|date:"d/m/Y" }}</small>
               </td>
