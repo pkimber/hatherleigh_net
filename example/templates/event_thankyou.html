@@ -1,0 +1,30 @@
+{% extends "project/base.html" %}
+
+{% block sub_title %}
+  Thankyou
+{% endblock sub_title %}
+
+{% block sub_heading %}
+  Thankyou
+{% endblock sub_heading %}
+
+{% block content %}
+  <div class="pure-g-r">
+    <div class="pure-u-1">
+      <div class="l-box">
+        <h2>
+          Thank you for posting your event.
+        </h2>
+        <p>
+          Our administrators will moderate it before uploading to the site.
+        </p>
+        <p>
+          <a href="{% url 'project.home' %}">
+            <i class="fa fa-home"></i>
+            Please click here to return to the home page...
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

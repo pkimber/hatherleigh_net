@@ -14,6 +14,7 @@ from .models import (
 from .views import (
     DashboardView,
     EventAnonCreateView,
+    EventAnonThankyouView,
     EventDetailView,
     EventListView,
     EventPublishView,
@@ -21,6 +22,7 @@ from .views import (
     EventTrustCreateView,
     EventUpdateView,
     StoryAnonCreateView,
+    StoryAnonThankyouView,
     StoryDetailView,
     StoryListView,
     StoryPublishView,
@@ -40,6 +42,10 @@ urlpatterns = patterns(
         view=EventAnonCreateView.as_view(),
         kwargs=dict(page=PAGE_HOME, section=SECTION_BODY),
         name='pump.event.create.anon'
+        ),
+    url(regex=r'^event/thankyou/$',
+        view=EventAnonThankyouView.as_view(),
+        name='pump.event.anon.thankyou'
         ),
     url(regex=r'^event/create/trust/$',
         view=EventTrustCreateView.as_view(),
@@ -66,6 +72,10 @@ urlpatterns = patterns(
         view=StoryAnonCreateView.as_view(),
         kwargs=dict(page=PAGE_HOME, section=SECTION_BODY),
         name='pump.story.create.anon'
+        ),
+    url(regex=r'^story/thankyou/$',
+        view=StoryAnonThankyouView.as_view(),
+        name='pump.story.anon.thankyou'
         ),
     url(regex=r'^story/create/trust/$',
         view=StoryTrustCreateView.as_view(),

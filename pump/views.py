@@ -72,7 +72,12 @@ class EventAnonCreateView(ContentCreateView):
             return super(EventAnonCreateView, self).get(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('project.home')
+        return reverse('pump.event.anon.thankyou')
+
+
+class EventAnonThankyouView(BaseMixin, TemplateView):
+
+    template_name = 'event_thankyou.html'
 
 
 class EventDetailView(
@@ -224,7 +229,12 @@ class StoryAnonCreateView(ContentCreateView):
             return super(StoryAnonCreateView, self).get(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('project.home')
+        return reverse('pump.story.anon.thankyou')
+
+
+class StoryAnonThankyouView(BaseMixin, TemplateView):
+
+    template_name = 'story_thankyou.html'
 
 
 class StoryTrustCreateView(LoginRequiredMixin, ContentCreateView):
