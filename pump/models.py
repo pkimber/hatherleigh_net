@@ -75,6 +75,9 @@ class PumpContentModel(ContentModel):
         return bool(self.user)
     is_trusted = property(_is_trusted)
 
+    def copy_related_data(self, published_instance):
+        published_instance.site = self.site.all()
+
     def truncated(self):
         """truncate content to 160 characters."""
         anchor = '<a href="{}">Read the full story...</a>'.format(

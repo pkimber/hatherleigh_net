@@ -14,6 +14,7 @@ from pump.templatetags.pump_tags import (
 )
 from pump.tests.scenario import (
     default_scenario_pump,
+    get_event_garden,
     get_event_history,
     get_event_microchip,
     get_event_temp,
@@ -21,6 +22,7 @@ from pump.tests.scenario import (
     get_story_craft_fair,
     get_story_market_fire,
     get_story_mg_descend,
+    get_story_wind_turbines,
 )
 
 
@@ -36,6 +38,7 @@ class TestPumpTags(TestCase):
         Must include todays events, but not events in the past
 
         """
+        self._publish(get_event_garden())
         self._publish(get_event_history())
         self._publish(get_event_microchip())
         self._publish(get_event_temp())
@@ -55,6 +58,7 @@ class TestPumpTags(TestCase):
         self._publish(get_story_craft_fair())
         self._publish(get_story_market_fire())
         self._publish(get_story_mg_descend())
+        self._publish(get_story_wind_turbines())
         result = story_list()
         published = result.get('story_list')
         self.assertListEqual(

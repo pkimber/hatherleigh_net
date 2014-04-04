@@ -50,6 +50,10 @@ def get_site_hatherleigh():
     return Site.objects.get(name='Hatherleigh')
 
 
+def get_event_garden():
+    return Event.objects.get(title='Gardening Trip')
+
+
 def get_event_history():
     return Event.objects.get(title='History Society')
 
@@ -83,6 +87,13 @@ def get_story_market_planning_published():
 
 def get_story_mg_descend():
     return Story.objects.get(title='MGs descend on Hatherleigh')
+
+
+def get_story_wind_turbines():
+    return Story.objects.get(
+        moderate_state=ModerateState._published(),
+        title='Wind Turbines'
+    )
 
 
 def default_section(verbose=None):
@@ -143,7 +154,7 @@ def default_scenario_pump():
     )
     make_story(
         make_story_block(get_page_home(), get_section_body()),
-        get_site_exbourne_and_jacobstowe(),
+        get_site_hatherleigh(),
         order=3,
         story_date=datetime.today(),
         name='Pat',
@@ -176,11 +187,26 @@ def default_scenario_pump():
         )
     )
     story_block.publish(get_user_staff())
+    story_block = make_story_block(get_page_home(), get_section_body())
+    story_date = datetime.now() + relativedelta(months=2, day=7)
+    make_story(
+        story_block,
+        get_site_exbourne_and_jacobstowe(),
+        order=5,
+        story_date=story_date,
+        user=get_user_web(),
+        title='Wind Turbines',
+        description=(
+            "The turbine will be 50 meters high and will affect the view "
+            "from Exbourne and Jacobstowe"
+        )
+    )
+    story_block.publish(get_user_staff())
     # event
     event_date = date.today() + relativedelta(days=8)
     make_event(
         make_event_block(get_page_home(), get_section_body()),
-        get_site_exbourne_and_jacobstowe(),
+        get_site_hatherleigh(),
         order=1,
         user=get_user_web(),
         title='Free Microchipping for Dogs',
@@ -198,7 +224,7 @@ def default_scenario_pump():
     event_date = date.today() + relativedelta(days=4)
     make_event(
         make_event_block(get_page_home(), get_section_body()),
-        get_site_exbourne_and_jacobstowe(),
+        get_site_hatherleigh(),
         order=2,
         name='Pat',
         email='code@pkimber.net',
@@ -241,5 +267,19 @@ def default_scenario_pump():
         event_time=time(19, 30),
         description=(
             "Temp Description"
+        )
+    )
+    event_date = date.today() + relativedelta(days=10)
+    make_event(
+        make_event_block(get_page_home(), get_section_body()),
+        get_site_exbourne_and_jacobstowe(),
+        order=5,
+        user=get_user_web(),
+        title='Gardening Trip',
+        event_date=event_date,
+        event_time=time(15, 00),
+        description=(
+            "We are off to Cornwall to visit two very different gardens in "
+            "and near Truro: Bosvigo House and Ladock House."
         )
     )
