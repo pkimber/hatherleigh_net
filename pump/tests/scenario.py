@@ -206,7 +206,7 @@ def default_scenario_pump():
     event_date = date.today() + relativedelta(days=8)
     make_event(
         make_event_block(get_page_home(), get_section_body()),
-        get_site_hatherleigh(),
+        get_site_exbourne_and_jacobstowe(),
         order=1,
         user=get_user_web(),
         title='Free Microchipping for Dogs',
@@ -272,7 +272,7 @@ def default_scenario_pump():
     event_date = date.today() + relativedelta(days=10)
     make_event(
         make_event_block(get_page_home(), get_section_body()),
-        get_site_exbourne_and_jacobstowe(),
+        get_site_hatherleigh(),
         order=5,
         user=get_user_web(),
         title='Gardening Trip',

@@ -27,6 +27,7 @@ from pump.tests.scenario import (
 
 
 class TestPumpTags(TestCase):
+    """Template tags which return stories and events for the current site."""
 
     def setUp(self):
         default_scenario_login()
@@ -49,7 +50,7 @@ class TestPumpTags(TestCase):
             [
                 'Temp Title Today',
                 'History Society',
-                'Free Microchipping for Dogs',
+                'Gardening Trip',
             ],
             [t.title for t in published]
         )
