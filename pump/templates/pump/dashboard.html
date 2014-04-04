@@ -32,9 +32,8 @@
             <tr>
               <th>ID</th>
               <th>Title</th>
-              <th>Area</th>
               <th>Author</th>
-              <th>Moderated</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -49,11 +48,11 @@
                     {{ story.title }}
                     {% if story.removed %}</del>{% endif %}
                   </a>
-                </td>
-                <td>
-                  {% for s in story.site.all %}
-                    {{ s.name }}
-                  {% endfor %}
+                  <small>
+                    {% for s in story.site.all %}
+                      {{ s.name }}
+                    {% endfor %}
+                  </small>
                 </td>
                 <td>
                   {% if story.is_trusted %}
@@ -95,10 +94,8 @@
               <th>ID</th>
               <th>Title</th>
               <th>Date</th>
-              <th>Time</th>
-              <th>Area</th>
               <th>Author</th>
-              <th>Moderated</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -113,17 +110,17 @@
                     {{ event.title }}
                     {% if event.removed %}</del>{% endif %}
                   </a>
+                  <small>
+                    {% for s in event.site.all %}
+                      {{ s.name }}
+                    {% endfor %}
+                  </small>
                 </td>
                 <td>
                   {{ event.event_date|date:"d/m/Y" }}
-                </td>
-                <td>
-                  {{ event.event_time|time:"H:i" }}
-                </td>
-                <td>
-                  {% for s in event.site.all %}
-                    {{ s.name }}
-                  {% endfor %}
+                  <small>
+                    {{ event.event_time|time:"H:i" }}
+                  </small>
                 </td>
                 <td>
                   {% if event.is_trusted %}
