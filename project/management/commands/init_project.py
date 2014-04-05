@@ -9,7 +9,7 @@ from django.core.management.base import BaseCommand
 
 from block.tests.scenario import default_block_state
 from pump.tests.scenario import (
-    default_section,
+    default_page_section,
     default_site,
 )
 
@@ -19,7 +19,7 @@ class Command(BaseCommand):
     help = "Set-up project (e.g. main navigation)"
 
     def handle(self, *args, **options):
-        default_section()
+        default_page_section()
         default_block_state()
         default_site()
         print("Project initialised...")

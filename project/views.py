@@ -11,8 +11,7 @@ from django.views.generic.dates import MonthArchiveView
 from base.view_utils import BaseMixin
 
 from pump.models import (
-    get_page_home,
-    get_section_body,
+    get_home_body,
     Story,
     StoryBlock,
 )
@@ -32,12 +31,8 @@ class StoryMonthArchiveView(BaseMixin, MonthArchiveView):
     template_name = 'story_archive_month.html'
 
     def get_queryset(self):
-        page = get_page_home()
-        section = get_section_body()
-        return Story.objects.published(
-            page,
-            section,
-        )
+        home_body = get_home_body()
+        return Story.objects.published(home_body)
 
 
 class StoryDetailView(BaseMixin, DetailView):
