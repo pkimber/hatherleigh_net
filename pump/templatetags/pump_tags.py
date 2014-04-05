@@ -7,9 +7,8 @@ from django import template
 from django.contrib.sites.models import Site
 
 from pump.models import (
-    get_page_home,
-    get_section_body,
     Event,
+    get_home_body,
     Story,
 )
 
@@ -24,12 +23,10 @@ def event_list():
 
     """
     current_site = Site.objects.get_current()
-    page = get_page_home()
-    section = get_section_body()
+    home_body = get_home_body()
     return dict(
         event_list=Event.objects.published(
-            page,
-            section,
+            home_body,
         ).filter(
             event_date__gte=date.today(),
             site__id__exact=current_site.pk,
@@ -48,12 +45,10 @@ def story_list():
 
     """
     current_site = Site.objects.get_current()
-    page = get_page_home()
-    section = get_section_body()
+    home_body = get_home_body()
     return dict(
         story_list=Story.objects.published(
-            page,
-            section,
+            home_body,
         ).filter(
             site__id__exact=current_site.pk,
         ).order_by(

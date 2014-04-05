@@ -13,6 +13,7 @@ from block.models import (
     BlockModel,
     ContentModel,
     Page,
+    PageSection,
     Section,
 )
 
@@ -21,12 +22,11 @@ PAGE_HOME = 'home'
 SECTION_BODY = 'body'
 
 
-def get_page_home():
-    return Page.objects.get(slug=PAGE_HOME)
-
-
-def get_section_body():
-    return Section.objects.get(slug=SECTION_BODY)
+def get_home_body():
+    return PageSection.objects.get(
+        page__slug=PAGE_HOME,
+        section__slug=SECTION_BODY,
+    )
 
 
 class PumpContentModel(ContentModel):

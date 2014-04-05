@@ -11,11 +11,8 @@ from pump.models import (
 )
 
 
-def make_event_block(page, section, **kwargs):
-    defaults = dict(
-        page=page,
-        section=section,
-    )
+def make_event_block(page_section, **kwargs):
+    defaults = dict(page_section=page_section)
     defaults.update(kwargs)
     return clean_and_save(EventBlock(**defaults))
 
@@ -31,11 +28,8 @@ def make_event(block, site, **kwargs):
     return event
 
 
-def make_story_block(page, section, **kwargs):
-    defaults = dict(
-        page=page,
-        section=section,
-    )
+def make_story_block(page_section, **kwargs):
+    defaults = dict(page_section=page_section)
     defaults.update(kwargs)
     return clean_and_save(StoryBlock(**defaults))
 

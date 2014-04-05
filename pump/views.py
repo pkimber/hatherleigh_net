@@ -32,8 +32,7 @@ from .forms import (
 from .models import (
     Event,
     EventBlock,
-    get_page_home,
-    get_section_body,
+    get_home_body,
     Story,
     StoryBlock,
 )
@@ -106,17 +105,12 @@ class EventListView(LoginRequiredMixin, BaseMixin, ListView):
     template_name = 'pump/event_list.html'
 
     def get_queryset(self):
-        page = get_page_home()
-        section = get_section_body()
+        home_body = get_home_body()
         if self.request.user.is_staff:
-            result = Event.objects.pending(
-                page,
-                section,
-            )
+            result = Event.objects.pending(home_body)
         else:
             result = Event.objects.pending(
-                page,
-                section,
+                home_body,
                 dict(user=self.request.user)
             )
         return result
@@ -183,20 +177,17 @@ class DashboardView(LoginRequiredMixin, BaseMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
-        page = get_page_home()
-        section = get_section_body()
+        home_body = get_home_body()
         if self.request.user.is_staff:
-            event_list = Event.objects.pending(page, section)
-            story_list = Story.objects.pending(page, section)
+            event_list = Event.objects.pending(home_body)
+            story_list = Story.objects.pending(home_body)
         else:
             event_list = Event.objects.pending(
-                page,
-                section,
+                home_body,
                 dict(user=self.request.user)
             )
             story_list = Story.objects.pending(
-                page,
-                section,
+                home_body,
                 dict(user=self.request.user)
             )
         context.update(dict(
@@ -280,20 +271,17 @@ class StoryListView(LoginRequiredMixin, BaseMixin, ListView):
     template_name = 'pump/story_list.html'
 
     def get_queryset(self):
-        page = get_page_home()
-        section = get_section_body()
+        home_body = get_home_body()
         if self.request.user.is_staff:
             result = Story.objects.pending(
-                page,
-                section,
+                home_body,
                 dict(
                     order_by='-order',
                 )
             )
         else:
             result = Story.objects.pending(
-                page,
-                section,
+                home_body,
                 dict(
                     order_by='-order',
                     user=self.request.user,

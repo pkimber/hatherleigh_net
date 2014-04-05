@@ -12,10 +12,7 @@ from login.tests.scenario import (
     user_contractor,
 )
 
-from pump.models import (
-    get_page_home,
-    get_section_body,
-)
+from pump.models import get_home_body
 from pump.tests.model_maker import (
     make_story,
     make_story_block,
@@ -37,7 +34,7 @@ class TestStory(TestCase):
 
     def _create_anon(self):
         return make_story(
-            make_story_block(get_page_home(), get_section_body()),
+            make_story_block(get_home_body()),
             get_site_hatherleigh(),
             order=1,
             story_date=datetime.now(),
@@ -49,7 +46,7 @@ class TestStory(TestCase):
 
     def _create_trust(self):
         return make_story(
-            make_story_block(get_page_home(), get_section_body()),
+            make_story_block(get_home_body()),
             get_site_hatherleigh(),
             order=1,
             story_date=datetime.now(),
@@ -85,7 +82,7 @@ class TestStory(TestCase):
         self.assertRaises(
             ValueError,
             make_story,
-            make_story_block(get_page_home(), get_section_body()),
+            make_story_block(get_home_body()),
             order=1,
             story_date=datetime.now(),
             site=get_site_hatherleigh(),

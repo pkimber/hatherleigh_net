@@ -14,11 +14,13 @@ from base.tests.model_maker import init_site
 from block.models import (
     ModerateState,
     Page,
+    PageSection,
     Section,
 )
-from block.tests.model_maker import (
-    make_page,
-    make_section,
+from block.service import (
+    init_page,
+    init_page_section,
+    init_section,
 )
 from block.tests.scenario import default_block_state
 from login.tests.scenario import (
@@ -28,8 +30,9 @@ from login.tests.scenario import (
 
 from pump.models import (
     Event,
-    get_page_home,
-    get_section_body,
+    get_home_body,
+    #get_page_home,
+    #get_section_body,
     PAGE_HOME,
     SECTION_BODY,
     Story,
@@ -96,19 +99,34 @@ def get_story_wind_turbines():
     )
 
 
-def default_section(verbose=None):
+def default_page_section(verbose=None):
     try:
         page = Page.objects.get(slug=PAGE_HOME)
     except Page.DoesNotExist:
-        page = make_page('Home', 0, 'pump/dashboard.html')
+        page = init_page('Home', 0, 'pump/dashboard.html')
         if verbose:
             print('created page: {}'.format(page))
     try:
         section_event = Section.objects.get(slug=SECTION_BODY)
     except Section.DoesNotExist:
-        section_event = make_section('Body')
+        section_event = init_section('Body')
         if verbose:
             print('created section: {}'.format(section_event))
+    try:
+        PageSection.objects.get(page=page, section=section_event)
+    except PageSection.DoesNotExist:
+        page_section = init_page_section(
+            page,
+            section_event,
+            'pump',
+            'Story',
+            'pump.story.create.anon',
+        )
+        if verbose:
+            print('created page section: {}/{}'.format(
+                page.slug,
+                section_event.slug,
+            ))
 
 
 def default_site(verbose=None):
@@ -117,12 +135,12 @@ def default_site(verbose=None):
 
 
 def default_scenario_pump():
-    default_section()
+    default_page_section()
     default_block_state()
     default_site()
     # story
     make_story(
-        make_story_block(get_page_home(), get_section_body()),
+        make_story_block(get_home_body()),
         get_site_hatherleigh(),
         order=1,
         story_date=datetime.today(),
@@ -136,7 +154,7 @@ def default_scenario_pump():
         )
     )
     make_story(
-        make_story_block(get_page_home(), get_section_body()),
+        make_story_block(get_home_body()),
         get_site_hatherleigh(),
         order=2,
         story_date=datetime.today(),
@@ -153,7 +171,7 @@ def default_scenario_pump():
         )
     )
     make_story(
-        make_story_block(get_page_home(), get_section_body()),
+        make_story_block(get_home_body()),
         get_site_hatherleigh(),
         order=3,
         story_date=datetime.today(),
@@ -168,7 +186,7 @@ def default_scenario_pump():
             "knitting to metal work."
         )
     )
-    story_block = make_story_block(get_page_home(), get_section_body())
+    story_block = make_story_block(get_home_body())
     story_date = datetime.now() + relativedelta(months=-1, day=7)
     make_story(
         story_block,
@@ -187,7 +205,7 @@ def default_scenario_pump():
         )
     )
     story_block.publish(get_user_staff())
-    story_block = make_story_block(get_page_home(), get_section_body())
+    story_block = make_story_block(get_home_body())
     story_date = datetime.now() + relativedelta(months=2, day=7)
     make_story(
         story_block,
@@ -205,7 +223,7 @@ def default_scenario_pump():
     # event
     event_date = date.today() + relativedelta(days=8)
     make_event(
-        make_event_block(get_page_home(), get_section_body()),
+        make_event_block(get_home_body()),
         get_site_exbourne_and_jacobstowe(),
         order=1,
         user=get_user_web(),
@@ -223,7 +241,7 @@ def default_scenario_pump():
     )
     event_date = date.today() + relativedelta(days=4)
     make_event(
-        make_event_block(get_page_home(), get_section_body()),
+        make_event_block(get_home_body()),
         get_site_hatherleigh(),
         order=2,
         name='Pat',
@@ -243,7 +261,7 @@ def default_scenario_pump():
     )
     event_date = date.today()
     make_event(
-        make_event_block(get_page_home(), get_section_body()),
+        make_event_block(get_home_body()),
         get_site_hatherleigh(),
         order=3,
         name='Pat',
@@ -257,7 +275,7 @@ def default_scenario_pump():
     )
     event_date = date.today() + relativedelta(days=-5)
     make_event(
-        make_event_block(get_page_home(), get_section_body()),
+        make_event_block(get_home_body()),
         get_site_hatherleigh(),
         order=4,
         name='Pat',
@@ -271,7 +289,7 @@ def default_scenario_pump():
     )
     event_date = date.today() + relativedelta(days=10)
     make_event(
-        make_event_block(get_page_home(), get_section_body()),
+        make_event_block(get_home_body()),
         get_site_hatherleigh(),
         order=5,
         user=get_user_web(),
